@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>test</title>
+</head>
+<body>
+  <div class="btn">
+    <button id="b1">平均发帖日统计</button>
+  </div>
+  <div id="charts"></div>
+</body>
+<script src="https://cdn.bootcss.com/axios/0.19.0/axios.min.js"></script>
+<script src="https://cdn.bootcss.com/echarts/4.2.1/echarts.js"></script>
+<script name="utils">
+  window.insData=Object.create({})
+  function getQueryHashByScript(str,word,arr){
+    arr=arr?arr:[]
+    let i=0,str2='',key=''
+    i=str.indexOf(word)  
+    if(i>-1){
+        key=str.substr(i+9,32)
+        arr.push(key)
+        str2=str.substring(i+42)  
+        return getQueryHashByScript(str2,word,arr)
+    }else{
+        return arr
+    }
+  }
+  function makeUserPicArray(profile){
+    let pics=profile.entry_data.ProfilePage[0].graphql.user.edge_owner_to_timeline_media.edges
+    let picArray=[]
+    for(let k of pics){
+      let obj={}
+      obj.commentCount=k.node.edge_media_to_comment.count
+      obj.likeCount=k.node.edge_media_preview_like.count
+      obj.createAt=k.node.taken_at_timestamp*1000
+      obj.shortcode=k.node.shortcode
+      obj.id=k.node.id
+      obj.location=k.location||''
+      if(k.node.thumbnail_resources&&k.node.thumbnail_resources[0]){
+        obj.src=k.node.thumbnail_resources[0] 
+      }else{
+         obj.src=k.node.display_url
+      }
+      picArray.push(obj)
+    }
+    return picArray
+  }
+</script>
+<script name="main">
+  
+  window.onload=function(){ 
+    var getShareData=function(data){
+      return JSON.parse(data.match(/(window._sharedData\s?)(=\s?)(.*?);<\/script>/)[3])
+    }
+    axios.get('https://www.instagram.com/taylorswift/')
+    .then(res=>{
+      console.log("TCL: window.onload -> res", res.data.length)
+      // let reg=/<script.*src="(.*ProfilePageContainer.*)".*<\/script>/
+      // console.log(str.match(reg)[1].split('"')[0])
+      // console.log('index shareData',getShareData(res.data))
+      let profile=getShareData(res.data)
+      let box=document.createElement('div')
+      box.id="boxscript"
+      let headStr=res.data.split('</head>')[0].split('<head>')[1].split('<script')[0]
+      // console.log(headStr)
+      box.innerHTML=headStr
+
+      let nodes=box.querySelectorAll('link'),jsFileURL='https://www.instagram.com'
+      for(let i=0;i<nodes.length;i++){
+        let node=nodes[i]
+        if(node.as==='script'&&node.href.indexOf('ProfilePageContainer')>0){
+            let url=window.location.origin
+            jsFileURL+=node.href.replace(url,'')
+            break
+        }
+      }
+      window.insData.profile=profile
+      window.insData.userPic=makeUserPicArray(profile)
+      return jsFileURL
+    })
+    .then(url=>{
+      axios.get(url)
+      .then(res=>{
+        let queryHashList=[]
+        getQueryHashByScript(res.data,'queryId',queryHashList)
+        window.insData.queryhash=queryHashList[2]
+        console.log("TCL: window.onload -> window.insData", window.insData)
+      })
+    })
+    const insQuery='https://www.instagram.com/graphql/query/'
+
+    // axios.get('https://www.instagram.com/p/BeTIIjPHvv_/')
+    // .then(res=>{
+    //    console.log('detail shareData',getShareData(res.data))
+    // })
+    // let queryURL='http://api.gainfollow.me/api/ins/morepic?username=ddbo119&after=QVFDTW9xVk1FUS1OSkRYdU51Z0REQ25oOFF0R1BKUUxFTHdPcFA3NE92WXdjTVlxMFNYME1MNzlvSEkyYm9JeHFMSDF5d1dZbXNsOTNjVHBDT1g4NzJkRw=='
+    // axios.get(queryURL)
+    // .then(res=>{
+    //    console.log('query shareData',res.data)
+    //    let data=res.data.data.user.edge_owner_to_timeline_media.edges
+    //    data.map(item=>{
+    //     // console.log("TCL: window.onload -> item", item)
+    //     if(item.node.edge_media_to_comment.count>0){
+          
+    //       console.log(item.node.edge_media_to_comment)
+    //     }
+    //    })
+    // })
+
+    // let insQuery='https://www.instagram.com/graphql/query/',p={
+    //   query_hash: 'f2405b236d85e8296cf30347c9f08c2a',
+    //   variables: {"id":"11830955","first":12,"after":"QVFEV3BiWklfLVZDTkdpcU9CZ1dxMGZ5RnNCU2NHazNkOF9PT1JlckowYUFBMGFBNHpwQ2hoNURIeVhrWG5mellYSDlNYk45TkRaWkhVcGlsUlE2NlJLVA=="}
+    // }
+    // axios.get(insQuery,{
+    //   // headers: {'X-Requested-With': 'XMLHttpRequest'},
+    //   params:p,
+    //   proxy: {
+    //     host: '127.0.0.1',
+    //     port: 7890
+    //   }
+    // })
+    // .then(res=>{
+    // console.log("TCL: insQuery -> res", res)
+      
+    // })
+    // .catch(err=>{
+    // console.log("TCL:insQuery -> err", err)
+      
+    // })
+  }
+
+
+</script>
+</html>
