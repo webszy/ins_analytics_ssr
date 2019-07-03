@@ -2,18 +2,19 @@
 
 
 export function getShareData(str,url){
-  if(url===undefined){
-    return JSON.parse(str.match(/(window._sharedData\s?)(=\s?)(.*?);<\/script>/)[3])
-  }else{
     return {
-      profile:JSON.parse(str.match(/(window._sharedData\s?)(=\s?)(.*?);<\/script>/)[3]),
+      data:JSON.parse(str.match(/(window._sharedData\s?)(=\s?)(.*?);<\/script>/)[3]),
       jsFileURL:url
     }
-  }
-  
 }
-export function getProfilePageContainerURL(str){
-    let reg=/<script.*src="(.*ProfilePageContainer.*)".*<\/script>/
+export function getProfilePageContainerURL(str,type){
+  type= type===undefined?type='profile':type
+  let reg
+    if(type==='profile'){
+       reg=/<script.*src="(.*ProfilePageContainer.*)".*<\/script>/
+    }else{
+      reg=/<script.*src="(.*TagPageContainer.*)".*<\/script>/
+    }
     return 'https://www.instagram.com'+str.match(reg)[1].split('"')[0]
 }
 export function getQueryHashByScript(str,word,arr){

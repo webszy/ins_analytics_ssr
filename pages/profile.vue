@@ -1,8 +1,19 @@
 <template>
-  <div class=''>
+  <section class='profilePage'>
+   <section class="info">
+     <div>
+       <header> <img :src="userPic" > {{this.userName}}</header>
+       <p>{{userBio}}</p>
+     </div>
+     <div>
+       <p>posts:{{postList.length}}</p>
+       <p>Followers:{{followers}}</p>
+       <p>Following:{{following}}</p>
+     </div>
+     <div></div>
+   </section>
    
-   
-  </div>
+  </section>
 </template>
 
 
@@ -25,9 +36,12 @@ return {
    profile:null,
    hasNextPage:false,
    end_cursor:'',
-  //  jsFileURL:'',
    queryIdList:[],
-   postList:[]
+   postList:[],
+   userPic:'',
+   userBio:'',
+   followers:0,
+   following:0
   }
  },
 mounted(){
@@ -40,10 +54,17 @@ methods:{
   getProfileData(usernmae){
     getUserBaseInfo(usernmae)
     .then(res=>{
-      this.profile=res.profile
-      this.hasNextPage=res.profile.entry_data.ProfilePage[0].graphql.user.edge_owner_to_timeline_media.page_info.has_next_page
-      this.end_cursor=res.profile.entry_data.ProfilePage[0].graphql.user.edge_owner_to_timeline_media.page_info.end_cursor
-      this.handlePostEdges(res.profile.entry_data.ProfilePage[0].graphql.user.edge_owner_to_timeline_media.edges)
+      this.profile=res.data
+      this.userPic=res.data.entry_data.ProfilePage[0].graphql.user.profile_pic_url
+      this.userBio=res.data.entry_data.ProfilePage[0].graphql.user.biography
+      if(this.userBio.length===0){
+        this.userBio='No Instagram BIO'
+      }
+      this.followers=res.data.entry_data.ProfilePage[0].graphql.user.edge_followed_by.count
+      this.following=res.data.entry_data.ProfilePage[0].graphql.user.edge_follow.count
+      this.hasNextPage=res.data.entry_data.ProfilePage[0].graphql.user.edge_owner_to_timeline_media.page_info.has_next_page
+      this.end_cursor=res.data.entry_data.ProfilePage[0].graphql.user.edge_owner_to_timeline_media.page_info.end_cursor
+      this.handlePostEdges(res.data.entry_data.ProfilePage[0].graphql.user.edge_owner_to_timeline_media.edges)
       return getQueryHash(res.jsFileURL)
     })
     .then(res=>{
@@ -73,7 +94,6 @@ methods:{
           },Math.random()*500+500)
         }else{
           this.getCommentDetails()
-          
         }
     }) 
   },
@@ -113,8 +133,8 @@ methods:{
         console.log("TCL: getCommentDetails -> res", res)
         // this.loadingInstance1.close()
         for(let k of res){
-          let data=k.entry_data.PostPage[0].graphql.shortcode_media.edge_media_to_parent_comment,
-          shortcode=k.entry_data.PostPage[0].graphql.shortcode_media.shortcode,
+          let data=k.data.entry_data.PostPage[0].graphql.shortcode_media.edge_media_to_parent_comment,
+          shortcode=k.data.entry_data.PostPage[0].graphql.shortcode_media.shortcode,
           len=this.postList.length
           for(let i=0;i<len;i++){
             let item = this.postList[i]
@@ -128,15 +148,31 @@ methods:{
       .finally(()=>{
         console.log('promise all down')
         window.posts=this.postList
+        this.loadingInstance1.close()
       })
     }
-    
   }
 },
-computed:{}
+computed:{
+ 
+}
 }
 </script>
-<style>
-
+<style lang='scss'>
+.profilePage{
+  width: 57.8125%;
+  height: 100%;
+  margin: 0 auto;
+  .info{
+    width: 100%;
+    display:flex;
+    justify-content: space-between;
+    div{
+      width: 32%;
+      height: 235px;
+      border:1px solid salmon;
+    }
+  }
+}
 
 </style>

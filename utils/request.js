@@ -36,16 +36,26 @@ export function getQueryHash(requestUrl){
       return  getQueryHashByScript(res,'queryId')
     })
 }
-export function getNextPageData(userId, end_cursor,queryHash) {
+
+export function getNextPageData(userId, end_cursor,queryHash,tagname) {
      let p={
         query_hash:queryHash,
         variables:''
-    },
-    variables={
+    },variables={}
+    if(tagname===undefined){
+       variables={
         id:userId,
         first:12,
         after:end_cursor
+      }
+    }else{
+      variables={
+        'tag_name':tagname,
+        first:6,
+        after:end_cursor
+      }
     }
+   
     p.variables=JSON.stringify(variables)
     return Service({
          url:InsBaseProfileURL+'graphql/query/',
@@ -58,5 +68,17 @@ export function getSingleMediaInfo(shortCode,username){
   })
   .then(res=>{
     return getShareData(res)
+  })
+}
+export function getHashTagData(tag){
+  return Service({
+    url:InsBaseProfileURL+'explore/tags/'+ tag +'/',
+     headers: {
+        'Content-Type': 'text/html;charset=UTF-8'
+     }
+  })
+  .then(res=>{
+    let jsFileURL=getProfilePageContainerURL(res,'hashtag')
+    return getShareData(res,jsFileURL)
   })
 }

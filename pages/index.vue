@@ -6,6 +6,11 @@
         <el-input placeholder="请输入instagram用户名" v-model.trim="username"></el-input>
         <el-button @click="goto">查询</el-button>
       </div>
+      <hr/>
+      <div style="display:flex;justify-content:space-between;">
+        <el-input placeholder="请输入hashtag" v-model.trim="hashtag"></el-input>
+        <el-button @click="goto2">查询</el-button>
+      </div>
    </el-card>
   </section>
 </template>
@@ -18,7 +23,8 @@ export default {
   },
   data(){
     return {
-      username:'ddbo119'
+      username:'ddbo119',
+      hashtag:'water'
     }
   },
   methods: {
@@ -28,7 +34,13 @@ export default {
       }else{
         alert('请输入用户名')
       }
-      
+    },
+    goto2(){
+      if(this.hashtag!=''){
+        this.$router.push({name:'hashtag',params:{hashtag:this.hashtag}})
+      }else{
+        alert('请输入用户名')
+      }
     }
   },
 }
