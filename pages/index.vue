@@ -30,14 +30,14 @@ export default {
   methods: {
     goto(){
       if(this.username!=''){
-        this.$router.push({name:'profile',params:{userName:this.username}})
+        this.$router.push({name:'profile-userName',params:{userName:this.username}})
       }else{
         alert('请输入用户名')
       }
     },
     goto2(){
       if(this.hashtag!=''){
-        this.$router.push({name:'hashtag',params:{hashtag:this.hashtag}})
+        this.$router.push({name:'hashtag-hashtag',params:{hashtag:this.hashtag}})
       }else{
         alert('请输入用户名')
       }
