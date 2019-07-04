@@ -12,7 +12,24 @@
      </div>
      <div></div>
    </section>
-   
+   <section class="charts">
+     <div class="card">
+      <div class="card-head"></div>
+      <monthly-weight 
+      :chartData=postList 
+      :firstTime=firstPostTime
+      :lastTime=lastPostTime
+      v-if="showMonthlyWeight"/>
+     </div>
+     <div class="card">
+      <div class="card-head"></div>
+      <monthly-weight-average
+      :chartData=postList 
+      :firstTime=firstPostTime
+      :lastTime=lastPostTime
+      v-if="showMonthlyWeight" />
+     </div>
+   </section>
   </section>
 </template>
 
@@ -26,9 +43,17 @@ import {
   getNextPageData,
   getSingleMediaInfo
 } from '@/utils/request'
+import {commonCloneWith} from '@/utils/tools'
+import MonthlyWeight from '@/components/charts/MonthlyWeight.vue'
+import MonthlyWeightAverage from '@/components/charts/MonthlyWeightAverage.vue'
+
 export default {
 name:'ProfileAnalytics',
-components:{loading},
+components:{
+  loading,
+  MonthlyWeight,
+  MonthlyWeightAverage
+},
 data(){
 return {
    loadingInstance1:null,
@@ -41,7 +66,11 @@ return {
    userPic:'',
    userBio:'',
    followers:0,
-   following:0
+   following:0,
+   monthEN:['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sept','Oct','Nov','Dec'],
+   showMonthlyWeight:false,
+   firstPostTime:0,
+   lastPostTime:0
   }
  },
 mounted(){
@@ -147,10 +176,22 @@ methods:{
       })
       .finally(()=>{
         console.log('promise all down')
-        window.posts=this.postList
-        this.loadingInstance1.close()
+        this.requestEnd()
       })
+    }else{
+      this.requestEnd()
     }
+  },
+  // 请求完数据进行的操作，关闭loading，排序postlist
+  requestEnd(){
+    // 按照升序排列数组
+    
+    this.postList.sort((a,b)=>{return a.taken_at_timestamp-b.taken_at_timestamp})
+    window.postList=this.postList
+    this.firstPostTime=this.postList[0].taken_at_timestamp
+    this.lastPostTime=this.postList.slice(-1)[0].taken_at_timestamp
+    this.loadingInstance1.close()
+    this.showMonthlyWeight=true
   }
 },
 computed:{
@@ -174,5 +215,16 @@ computed:{
     }
   }
 }
-
+.charts{
+  width: 100%;
+  .card{
+    width: 100%;
+    height: 500px;
+    padding: 30px;
+    box-sizing: border-box;
+    border: 1px solid rgba(0,0,0,0.125);
+    background-color: #fff;
+    
+  }
+}
 </style>

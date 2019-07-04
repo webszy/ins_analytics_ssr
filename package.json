@@ -1,5 +1,5 @@
 {
-  "name": "pc_analysis_site",
+  "name": "pc_analytics_site",
   "version": "1.0.0",
   "description": "analysis your instagram account",
   "author": "webszy",
@@ -22,5 +22,8 @@
   },
   "devDependencies": {
     "nodemon": "^1.18.9"
-  }
+  },
+  "browserslist": [
+    "cover 99.5%"
+  ]
 }
