@@ -1,17 +1,19 @@
 <template>
-  <div class='chart'></div>
+  <div class='chart' ref="MonthlyWeight">
+  </div>
 </template>
 
 
 <script>
 import {weekName,monthName} from '@/utils/variables'
 export default {
-name:'MonthlyWeightAverageChart',
+name:'MonthlyWeightChart',
 data(){
 return {
-    myChart:null,
-    option : {
-     backgroundColor: new this.$echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+  myChart:null,
+ 
+  option :{
+    backgroundColor: new this.$echarts.graphic.LinearGradient(0, 0, 0, 1, [{
             offset: 0,
             color: '#c86589'
         },
@@ -30,15 +32,17 @@ return {
             fontWeight:100,
         }
     },
-    "tooltip": {
-        "trigger": "axis",
-        "axisPointer": {
-            "type": "shadow",
-            textStyle: {
-                color: "#fff"
+    // 鼠标选中时弹框
+    tooltip:{
+        show:true,
+        trigger:'axis',
+        axisPointer: {
+            type: 'line',
+            lineStyle: {
+                opacity: 0
             }
-
         },
+        formatter: "{b}: {c}"
     },
     grid: {
         top: '10%',
@@ -47,150 +51,103 @@ return {
         bottom: '10%',
         containLabel: true,
     },
-    "legend": {
-        right: '5%',
-        top: '10%',
-        textStyle: {
-            color: '#90979c',
+    xAxis: {
+        type: 'category',
+        boundaryGap: false,
+        data: [],
+        axisLabel: {
+            margin: 30,
+            color: '#ffffff63'
         },
-        "data": ['女', '男', '平均']
+        axisLine: {
+            lineStyle: {
+                color: '#fff',
+                width: 2
+            }
+        },
+        axisTick: {
+            show: true,
+            length: 25,
+            lineStyle: {
+                color: "#ffffff1f"
+            }
+        },
+        splitLine: {
+            show: true,
+            lineStyle: {
+                color: '#ffffff1f'
+            }
+        }
     },
-     
-    "calculable": true,
-    "xAxis": [{
-        "type": "category",
-        "axisLine": {
+    yAxis: [{
+        type: 'value',
+        position: 'left',
+        axisLabel: {
+            margin: 20,
+            color: '#ffffff63'
+        },
+        axisTick: {
+            show: true,
+            length: 15,
             lineStyle: {
-                color: '#90979c'
+                color: "#ffffff1f",
             }
         },
-        "splitLine": {
-            "show": false
-        },
-        "axisTick": {
-            "show": false
-        },
-        "splitArea": {
-            "show": false
-        },
-        "axisLabel": {
-            "interval": 0,
-        },
-        "data": [],
-    }],
-    "yAxis": [{
-        "type": "value",
-        "splitLine": {
-            "show": false
-        },
-        "axisLine": {
+        splitLine: {
+            show: true,
             lineStyle: {
-                color: '#90979c'
+                color: '#ffffff1f'
             }
         },
-        "axisTick": {
-            "show": false
-        },
-        "axisLabel": {
-            "interval": 0,
-
-        },
-        "splitArea": {
-            "show": false
-        },
-
+        axisLine: {
+            lineStyle: {
+                color: '#fff',
+                width: 2
+            }
+        }
     }],
-    "dataZoom": [{
-        "show": true,
-        "height": 30,
-        "xAxisIndex": [
-            0
-        ],
-        bottom: 30,
-        "start": 10,
-        "end": 80,
-        handleIcon: 'path://M306.1,413c0,2.2-1.8,4-4,4h-59.8c-2.2,0-4-1.8-4-4V200.8c0-2.2,1.8-4,4-4h59.8c2.2,0,4,1.8,4,4V413z',
-        handleSize: '110%',
-        handleStyle:{
-            color:"#d3dee5",
-            
-        },
-           textStyle:{
-            color:"#fff"},
-           borderColor:"#90979c"
-        
-        
-    }, {
-        "type": "inside",
-        "show": true,
-        "height": 15,
-        "start": 1,
-        "end": 35
-    }],
-    "series": [{
-            "name": "Likes",
-            "type": "bar",
-            "stack": "",
-            "barMaxWidth": 35,
-            "barGap": "10%",
-            "itemStyle": {
-                "normal": {
-                    "color": "rgba(255,144,128,1)",
-                    "label": {
-                        "show": true,
-                        "textStyle": {
-                            "color": "#333"
-                        },
-                        "position": "insideTop",
-                        formatter: function(p) {
-                            return p.value > 0 ? (p.value) : '';
-                        }
-                    }
-                }
+    series: [{
+        name: 'Post Weight',
+        type: 'line',
+        smooth: true, //是否平滑曲线显示
+        showAllSymbol: true,
+        symbol: 'circle',
+        symbolSize: 6,
+        lineStyle: {
+            normal: {
+                color: "#fff", // 线条颜色
             },
-            "data": [],
         },
-
-        {
-            "name": "Comments",
-            "type": "bar",
-            "stack": "",
-            "itemStyle": {
-                "normal": {
-                    "color": "rgba(0,191,183,1)",
-                    "barBorderRadius": 0,
-                    "label": {
-                        "show": true,
-                        "position": "top",
-                        formatter: function(p) {
-                            return p.value > 0 ? (p.value) : '';
-                        }
-                    }
-                }
-            },
-            "data": []
-        }, {
-            "name": "Total",
-            "type": "line",
-            "stack": "",
-            symbolSize:10,
-            symbol:'circle',
-            "itemStyle": {
-                "normal": {
-                    "color": "rgba(252,230,48,1)",
-                    "barBorderRadius": 0,
-                    "label": {
-                        "show": true,
-                        "position": "top",
-                        formatter: function(p) {
-                            return p.value > 0 ? (p.value) : '';
-                        }
-                    }
-                }
-            },
-            "data": []
+        label: {
+            show: true,
+            position: 'top',
+            textStyle: {
+                color: '#fff',
+            }
         },
-    ]
+        itemStyle: {
+            color: "red",
+            borderColor: "#fff",
+            borderWidth: 3
+        },
+        tooltip: {
+            show: false
+        },
+        areaStyle: {
+            normal: {
+                color: new this.$echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                        offset: 0,
+                        color: '#eb64fb'
+                    },
+                    {
+                        offset: 1,
+                        color: '#3fbbff0d'
+                    }
+                ], false),
+            }
+        },
+        data: []
+    }]
     }
 }
 },
@@ -211,36 +168,56 @@ props:{
 mounted(){
   this._initData().then(({xData,yData})=>{
       this.option.xAxis.data=xData
-      this.option.series[0].data=yData.likes
-      this.option.series[1].data=yData.comments
-      this.option.series[2].data=yData.Total
+      this.option.series[0].data=yData
       this.option.title.text=this.getTitle()
       this._initChart()
+  })
+  .catch(err=>{
+  console.log("TCL: err", err)
+      
   })
   
 },
 methods:{
   _initData(){
     return new Promise((resolve,reject)=>{
-        let xData=[],yData={},
-        likes=[],comments=[],
-        Total=[]
-        // 3、分拆sum为xData，yData
+        // let xData=[],yData=[],len=this.chartData.length,
+        //  3、分拆sum为xData，yData
+        // for(let k of this.chartData){
+        //     let d=new Date(k.taken_at_timestamp*1000),
+        //     month=d.getMonth(),
+        //     monthStr=monthName[month],
+        //     year=(d.getFullYear()+'').substr(-2),
+        //     likeCount=k.edge_media_preview_like.count||0,
+        //     commentCount=k.edge_media_to_comment.count||0,
+        //     avg=Math.floor((likeCount+commentCount)/len),
+        //     keyName=monthStr+"'"+year
+        //     xData[keyName]=avg
+        //     yData.push(avg)
+        // }
+        // resolve({xData,yData})
+        let Data={},len=0,xData=[],yData=[]
         for(let k of this.chartData){
-            console.log("TCL: _initData -> k", k)
             let d=new Date(k.taken_at_timestamp*1000),
             month=d.getMonth(),
-            monthStr=monthName[month],
             year=(d.getFullYear()+'').substr(-2),
+            monthStr=monthName[month]+"'"+year,
+            
             likeCount=k.edge_media_preview_like.count||0,
-            commentCount=k.edge_media_to_comment.count||0 
-            xData.push(monthStr+"'"+year)
-            likes.push(likeCount)
-            comments.push(commentCount)
-            Total.push(likeCount+commentCount)
+            commentCount=k.edge_media_to_comment.count||0
+            if(!Data[monthStr]){
+                Data[monthStr]=likeCount+commentCount
+                len++
+            }else{
+                Data[monthStr]+=likeCount+commentCount
+            }
         }
-        yData={likes,comments,Total}
-        resolve({xData,yData})
+        for(let k in Data){
+            xData.push(k)
+            let avg=Math.floor(Data[k]/len)
+            yData.push(avg)
+        }
+         resolve({xData,yData})
     })
    
   },

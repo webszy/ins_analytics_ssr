@@ -13,22 +13,16 @@
      <div></div>
    </section>
    <section class="charts">
-     <div class="card">
-      <div class="card-head"></div>
-      <monthly-weight 
-      :chartData=postList 
-      :firstTime=firstPostTime
-      :lastTime=lastPostTime
-      v-if="showMonthlyWeight"/>
-     </div>
-     <div class="card">
+      <div class="card">
       <div class="card-head"></div>
       <monthly-weight-average
       :chartData=postList 
       :firstTime=firstPostTime
       :lastTime=lastPostTime
-      v-if="showMonthlyWeight" />
+      v-if=showMonthlyWeight />
      </div>
+     
+    
    </section>
   </section>
 </template>
@@ -44,14 +38,12 @@ import {
   getSingleMediaInfo
 } from '@/utils/request'
 import {commonCloneWith} from '@/utils/tools'
-import MonthlyWeight from '@/components/charts/MonthlyWeight.vue'
 import MonthlyWeightAverage from '@/components/charts/MonthlyWeightAverage.vue'
 
 export default {
 name:'ProfileAnalytics',
 components:{
   loading,
-  MonthlyWeight,
   MonthlyWeightAverage
 },
 data(){
@@ -151,7 +143,8 @@ methods:{
     let promises=[]
     for(let k of this.postList){
       let comment=k.edge_media_to_comment
-      if(comment.count>0&&!comment.edges){
+
+      if((comment.count>0&&!comment.edges)||comment===undefined){
         let request=getSingleMediaInfo(k.shortcode,k.owner.usernmae)
         promises.push(request)
       }
@@ -185,7 +178,6 @@ methods:{
   // 请求完数据进行的操作，关闭loading，排序postlist
   requestEnd(){
     // 按照升序排列数组
-    
     this.postList.sort((a,b)=>{return a.taken_at_timestamp-b.taken_at_timestamp})
     window.postList=this.postList
     this.firstPostTime=this.postList[0].taken_at_timestamp
@@ -219,7 +211,7 @@ computed:{
   width: 100%;
   .card{
     width: 100%;
-    height: 500px;
+    height: 600px;
     padding: 30px;
     box-sizing: border-box;
     border: 1px solid rgba(0,0,0,0.125);
