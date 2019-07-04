@@ -181,21 +181,7 @@ mounted(){
 methods:{
   _initData(){
     return new Promise((resolve,reject)=>{
-        // let xData=[],yData=[],len=this.chartData.length,
-        //  3、分拆sum为xData，yData
-        // for(let k of this.chartData){
-        //     let d=new Date(k.taken_at_timestamp*1000),
-        //     month=d.getMonth(),
-        //     monthStr=monthName[month],
-        //     year=(d.getFullYear()+'').substr(-2),
-        //     likeCount=k.edge_media_preview_like.count||0,
-        //     commentCount=k.edge_media_to_comment.count||0,
-        //     avg=Math.floor((likeCount+commentCount)/len),
-        //     keyName=monthStr+"'"+year
-        //     xData[keyName]=avg
-        //     yData.push(avg)
-        // }
-        // resolve({xData,yData})
+
         let Data={},len=0,xData=[],yData=[]
         for(let k of this.chartData){
             let d=new Date(k.taken_at_timestamp*1000),

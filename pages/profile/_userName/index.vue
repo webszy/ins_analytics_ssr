@@ -21,7 +21,14 @@
       :lastTime=lastPostTime
       v-if=showMonthlyWeight />
      </div>
-     
+     <div class="card">
+      <div class="card-head"></div>
+      <monthly-post
+      :chartData=postList 
+      :firstTime=firstPostTime
+      :lastTime=lastPostTime
+      v-if=showMonthlyWeight />
+     </div>
     
    </section>
   </section>
@@ -39,12 +46,13 @@ import {
 } from '@/utils/request'
 import {commonCloneWith} from '@/utils/tools'
 import MonthlyWeightAverage from '@/components/charts/MonthlyWeightAverage.vue'
-
+import MonthlyPost from '@/components/charts/MonthlyPost.vue'
 export default {
 name:'ProfileAnalytics',
 components:{
   loading,
-  MonthlyWeightAverage
+  MonthlyWeightAverage,
+  MonthlyPost
 },
 data(){
 return {
@@ -114,7 +122,7 @@ methods:{
             return this.getUserAllPost()
           },Math.random()*500+500)
         }else{
-          this.getCommentDetails()
+          this.ckeckComment()
         }
     }) 
   },
@@ -139,29 +147,32 @@ methods:{
     }
   },
   // 发现拉取首页时，没有评论的详细信息，需要通过shortcode获取一遍，query接口的时候是有详细信息的
-  getCommentDetails(){
+  ckeckComment(){
     let promises=[]
     for(let k of this.postList){
       let comment=k.edge_media_to_comment
-
+      
       if((comment.count>0&&!comment.edges)||comment===undefined){
         let request=getSingleMediaInfo(k.shortcode,k.owner.usernmae)
         promises.push(request)
       }
     }
+
     if(promises.length){
       Promise.all(promises)
       .then(res=>{
-        console.log("TCL: getCommentDetails -> res", res)
         // this.loadingInstance1.close()
         for(let k of res){
-          let data=k.data.entry_data.PostPage[0].graphql.shortcode_media.edge_media_to_parent_comment,
+          let data=k.data.entry_data.PostPage[0].graphql.shortcode_media.edge_media_to_parent_comment
+          ||k.data.entry_data.PostPage[0].graphql.shortcode_media.edge_media_preview_comment,
           shortcode=k.data.entry_data.PostPage[0].graphql.shortcode_media.shortcode,
           len=this.postList.length
+          
+
           for(let i=0;i<len;i++){
             let item = this.postList[i]
-            if(item.shortcode===shortcode){
-              item.edge_media_to_comment=data
+            if(item.shortcode===shortcode&&data!==undefined){
+              item.edge_media_to_comment=data              
               break
             }
           }        
