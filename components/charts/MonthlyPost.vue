@@ -23,12 +23,23 @@ data(){
               }
           },
           formatter: function(prams) {
-              return "Posts" + prams[0].data
+          console.log("TCL: data -> prams", prams)
+              return "PostCount: " + prams[0].value
           }
       },
+      title:{
+        text:'',
+        right: "4%",
+        bottom: "2%",
+        textStyle: {
+            color: "#fff",
+            fontSize: 13,
+            fontWeight:100,
+        }
+      },
       grid: {
-          left: '0%',
-          right: '0%',
+          left: '5%',
+          right: '5%',
           bottom: '5%',
           top: '7%',
           height: '85%',
@@ -114,7 +125,7 @@ data(){
               },
               itemStyle: {
                   normal: {
-                      color: new echarts.graphic.LinearGradient(
+                      color: new this.$echarts.graphic.LinearGradient(
                           0, 0, 0, 1, [{
                                   offset: 0,
                                   color: '#00feff'
@@ -174,9 +185,8 @@ mounted(){
   console.log("TCL: mounted -> xData", this.option)
       this.option.xAxis.data=xData
       this.option.series[0].data=yData
-      this.option.series[1].data=new Array(yData.length)
-      for(let k in yData){
-        this.option.series[0].data[k]=100
+      for(let k of yData){
+          this.option.series[1].data.push(100)
       }
       this.option.title.text=this.getTitle()
       this._initChart()
@@ -189,21 +199,21 @@ mounted(){
 methods:{
   _initData(){
      return new Promise((resolve,reject)=>{
-        let Data={},xData=[],yData=[]
+        let baseData={},xData=[],yData=[]
         for(let k of this.chartData){
             let d=new Date(k.taken_at_timestamp*1000),
             month=d.getMonth(),
             year=(d.getFullYear()+'').substr(-2),
             monthStr=monthName[month]+"'"+year
-            if(!Data[monthStr]){
-                Data[monthStr]=0
+            if(!baseData[monthStr]){
+                baseData[monthStr]=1
             }else{
-              Data[monthStr]++
+              baseData[monthStr]++
             }
         }
-        for(let k in Data){
+        for(let k in baseData){
             xData.push(k)
-            yData.push(Data[k])
+            yData.push(baseData[k])
         }
         resolve({xData,yData})
     })
