@@ -15,21 +15,28 @@
    <section class="charts">
       <div class="card">
       <div class="card-head"></div>
-      <monthly-weight-average
-      :chartData=postList 
-      :firstTime=firstPostTime
-      :lastTime=lastPostTime
-      v-if=showMonthlyWeight />
+        <monthly-weight-average
+        :chartData=postList 
+        :firstTime=firstPostTime
+        :lastTime=lastPostTime
+        v-if=showMonthlyWeight />
      </div>
      <div class="card">
       <div class="card-head"></div>
-      <monthly-post
-      :chartData=postList 
-      :firstTime=firstPostTime
-      :lastTime=lastPostTime
-      v-if=showMonthlyWeight />
+        <monthly-post
+        :chartData=postList 
+        :firstTime=firstPostTime
+        :lastTime=lastPostTime
+        v-if=showMonthlyWeight />
      </div>
-    
+     <div class="card half">
+      <div class="card-head"></div>
+        <most-tags
+        :chartData=postList 
+        :firstTime=firstPostTime
+        :lastTime=lastPostTime
+        v-if=showMonthlyWeight />
+     </div>
    </section>
   </section>
 </template>
@@ -47,12 +54,15 @@ import {
 import {commonCloneWith} from '@/utils/tools'
 import MonthlyWeightAverage from '@/components/charts/MonthlyWeightAverage.vue'
 import MonthlyPost from '@/components/charts/MonthlyPost.vue'
+import mostTags from '@/components/charts/mostTags.vue'
+
 export default {
 name:'ProfileAnalytics',
 components:{
   loading,
   MonthlyWeightAverage,
-  MonthlyPost
+  MonthlyPost,
+  mostTags
 },
 data(){
 return {
@@ -228,6 +238,10 @@ computed:{
     border: 1px solid rgba(0,0,0,0.125);
     background-color: #fff;
     
+  }
+  .half{
+    float: left;
+    width: 50%;
   }
 }
 </style>

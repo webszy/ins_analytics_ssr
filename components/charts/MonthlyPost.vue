@@ -23,7 +23,6 @@ data(){
               }
           },
           formatter: function(prams) {
-          console.log("TCL: data -> prams", prams)
               return "PostCount: " + prams[0].value
           }
       },
@@ -182,11 +181,10 @@ data(){
 },
 mounted(){
   this._initData().then(({xData,yData})=>{
-  console.log("TCL: mounted -> xData", this.option)
       this.option.xAxis.data=xData
       this.option.series[0].data=yData
       for(let k of yData){
-          this.option.series[1].data.push(100)
+          this.option.series[1].data.push(yData[yData.length-1])
       }
       this.option.title.text=this.getTitle()
       this._initChart()
