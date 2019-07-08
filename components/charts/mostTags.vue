@@ -39,11 +39,24 @@ data(){
           formatter: "{b}:{c}"
         },
       title:{
-        text:'Top Tags'
+        text:'Hashtags most used',
+        left: "center",
+        top: "4%",
+        textStyle: {
+            color: "#fff",
+            fontSize: 22,
+            fontWeight:600,
+        },
+        subtext:this.commonTitle,
+        subtextStyle :{
+          color: "#fff",
+            fontSize: 12,
+            fontWeight:100,
+        }
       },
       grid: {
           left: '5%',
-          top: '12%',
+          top: '10%',
           right: '5%',
           bottom: '8%',
           containLabel: true

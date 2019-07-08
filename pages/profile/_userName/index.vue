@@ -20,7 +20,7 @@
         :firstTime=firstPostTime
         :lastTime=lastPostTime
         :commonTitle=commonTitle
-        v-if=showMonthlyWeight />
+        v-if=showChart />
      </div>
      <div class="card">
       <div class="card-head"></div>
@@ -29,26 +29,38 @@
         :firstTime=firstPostTime
         :lastTime=lastPostTime
          :commonTitle=commonTitle
-        v-if=showMonthlyWeight />
+        v-if=showChart />
      </div>
-     <div class="card half">
-      <div class="card-head"></div>
-        <most-tags
-        :chartData=postList 
-        :firstTime=firstPostTime
-        :lastTime=lastPostTime
-         :commonTitle=commonTitle
-        v-if=showMonthlyWeight />
+     <div class="clearfix">
+        <div class="card half">
+          <div class="card-head"></div>
+            <most-tags
+            :chartData=postList 
+            :firstTime=firstPostTime
+            :lastTime=lastPostTime
+            :commonTitle=commonTitle
+            v-if=showChart />
+        </div>
+        <div class="card half">
+          <div class="card-head"></div>
+            <location
+            :chartData=postList 
+            :firstTime=firstPostTime
+            :lastTime=lastPostTime
+            :commonTitle=commonTitle
+            v-if=showChart />
+        </div>
      </div>
-     <div class="card half">
+     <div class="card">
       <div class="card-head"></div>
-        <location
+        <post-like-and-comment-by-type
         :chartData=postList 
         :firstTime=firstPostTime
         :lastTime=lastPostTime
         :commonTitle=commonTitle
-        v-if=showMonthlyWeight />
+        v-if=showChart />
      </div>
+
    </section>
   </section>
 </template>
@@ -69,6 +81,7 @@ import MonthlyWeightAverage from '@/components/charts/MonthlyWeightAverage.vue'
 import MonthlyPost from '@/components/charts/MonthlyPost.vue'
 import mostTags from '@/components/charts/mostTags.vue'
 import location from '@/components/charts/location.vue'
+import postLikeAndCommentByType from '@/components/charts/postLikeAndCommentBytype.vue'
 
 export default {
 name:'ProfileAnalytics',
@@ -77,7 +90,8 @@ components:{
   MonthlyWeightAverage,
   MonthlyPost,
   mostTags,
-  location
+  location,
+  postLikeAndCommentByType
 },
 data(){
 return {
@@ -93,7 +107,7 @@ return {
    followers:0,
    following:0,
    monthEN:['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sept','Oct','Nov','Dec'],
-   showMonthlyWeight:false,
+   showChart:false,
    firstPostTime:0,
    lastPostTime:0,
    commonTitle:''
@@ -216,6 +230,7 @@ methods:{
     // 按照升序排列数组
     this.postList.sort((a,b)=> a.taken_at_timestamp-b.taken_at_timestamp)
     window.postList=this.postList
+    // 排序后获取第一个帖子的时间和最后一个帖子的时间
     this.firstPostTime=this.postList[0].taken_at_timestamp
     this.lastPostTime=this.postList.slice(-1)[0].taken_at_timestamp
     /*获取标题*/ 
@@ -223,11 +238,10 @@ methods:{
     last =new Date(this.lastPostTime*1000),
     firstTimeString=`${weekName[first.getDay()]} ${first.getDate()} ${monthName[first.getMonth()]} ${first.getFullYear()} - `,
     lastTimeString=`${weekName[last.getDay()]} ${last.getDate()} ${monthName[last.getMonth()]} ${last.getFullYear()}`
-
     this.commonTitle=firstTimeString+lastTimeString
   
     this.loadingInstance1.close()
-    this.showMonthlyWeight=true
+    this.showChart=true
   }
 },
 computed:{
@@ -265,5 +279,16 @@ computed:{
     float: left;
     width: 50%;
   }
+
 }
+
+.clearfix::after{
+    content: '';
+    width: 0;
+    height: 0;
+    display: block;
+    clear: both;
+    visibility: hidden;
+    opacity: 0;
+  }
 </style>

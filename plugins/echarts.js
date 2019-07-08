@@ -6,6 +6,5 @@ import echarts from 'echarts'
 if (process.client) {
   window.echarts=echarts
   require('echarts-wordcloud')
-  Vue.prototype.$echarts= window.echarts
 }
-
+ Vue.prototype.$echarts= echarts
