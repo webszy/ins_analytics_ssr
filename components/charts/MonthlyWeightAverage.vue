@@ -43,7 +43,7 @@ return {
                 opacity: 0
             }
         },
-        formatter: "{b}: {c}"
+        formatter: "{a} on {b}: {c}"
     },
     grid: {
         top: '10%',
@@ -71,12 +71,6 @@ return {
             length: 25,
             lineStyle: {
                 color: "#ffffff1f"
-            }
-        },
-        splitLine: {
-            show: true,
-            lineStyle: {
-                color: '#ffffff1f'
             }
         }
     },
@@ -108,7 +102,7 @@ return {
         }
     }],
     series: [{
-        name: 'Post Weight',
+        name: 'Likes',
         type: 'line',
         smooth: true, //是否平滑曲线显示
         showAllSymbol: true,
@@ -132,7 +126,13 @@ return {
             borderWidth: 3
         },
         tooltip: {
-            show: false
+            show: true
+        },
+         markLine: {
+            data: [{
+                type: 'average',
+                name: 'average'
+            }]
         },
         areaStyle: {
             normal: {
@@ -148,6 +148,55 @@ return {
             }
         },
         data: []
+    },
+    {
+        name: 'Comments',
+        type: 'line',
+        smooth: true, //是否平滑曲线显示
+        showAllSymbol: true,
+        symbol: 'circle',
+        symbolSize: 6,
+        lineStyle: {
+            normal: {
+                color: "#fff", // 线条颜色
+            },
+        },
+        label: {
+            show: true,
+            position: 'top',
+            textStyle: {
+                color: '#fff',
+            }
+        },
+        itemStyle: {
+            color: "red",
+            borderColor: "#fff",
+            borderWidth: 3
+        },
+        tooltip: {
+            show: true
+        },         
+        markLine: {
+            data: [{
+                type: 'average',
+                name: 'average'
+            }]
+        },
+        areaStyle: {
+            normal: {
+                color: new this.$echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                        offset: 0,
+                        color: '#eb64fb'
+                    },
+                    {
+                        offset: 1,
+                        color: '#3fbbff0d'
+                    }
+                ], false),
+            }
+        },
+        data: []
+
     }]
     }
 }
@@ -171,9 +220,10 @@ props:{
   }
 },
 mounted(){
-  this._initData().then(({xData,yData})=>{
+  this._initData().then(({xData,likeArr,commentArr})=>{
       this.option.xAxis.data=xData
-      this.option.series[0].data=yData
+      this.option.series[0].data=likeArr
+      this.option.series[1].data=commentArr
       this.option.title.text=this.commonTitle
       this._initChart()
   })
@@ -187,7 +237,7 @@ methods:{
   _initData(){
     return new Promise((resolve,reject)=>{
 
-        let Data={},len=0,xData=[],yData=[]
+        let likeData={},commentData={},len=0,likeArr=[],commentArr=[],xData=[]
         for(let k of this.chartData){
             let d=new Date(k.taken_at_timestamp*1000),
             month=d.getMonth(),
@@ -196,19 +246,24 @@ methods:{
             
             likeCount=k.edge_media_preview_like.count||0,
             commentCount=k.edge_media_to_comment.count||0
-            if(!Data[monthStr]){
-                Data[monthStr]=likeCount+commentCount
+            if(!likeData[monthStr]){
+                likeData[monthStr]=0
                 len++
-            }else{
-                Data[monthStr]+=likeCount+commentCount
             }
+            likeData[monthStr]+=likeCount
+            
+            if(!commentData[monthStr]){
+                commentData[monthStr]=0
+            }
+            commentData[monthStr]+=commentCount
         }
-        for(let k in Data){
+
+        for(let k in likeData){
             xData.push(k)
-            let avg=Math.floor(Data[k]/len)
-            yData.push(avg)
+            likeArr.push(likeData[k])
+            commentArr.push(commentData[k])
         }
-         resolve({xData,yData})
+         resolve({xData,likeArr,commentArr})
     })
    
   },

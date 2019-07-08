@@ -43,14 +43,20 @@ computed:{
     // 遍历
     let data={}
     for(let k of this.chartData){
+     
       if(k.location&&k.location!==null){
-        if(data[k.location]){
-          data[k.location]++
-        }else{
-          data[k.location]=0
+      console.log("TCL: userLocation -> k.location", k.location)
+        if(k.location.name&&k.location.name.length){
+
+          if(!data[k.location.name]){
+            data[k.location.name]=1
+          }else{
+            data[k.location.name]++
+          }
         }
       }
     }
+    
     let arr=[]
     for(let k in data){
       let obj={
@@ -60,8 +66,8 @@ computed:{
       arr.push(obj)
     }
     arr.sort((a,b)=>a.count-b.count)
-
-    return arr[0]?arr[0]:'unknown'
+  
+    return arr[0]?arr[0].location:'unknown'
   }
 }
 }
