@@ -4,7 +4,6 @@
 
 
 <script>
-import {weekName,monthName} from '@/utils/variables'
 export default {
 name:'MonthlyWeightAverageChart',
 data(){
@@ -203,6 +202,10 @@ props:{
   lastTime:{
     type:Number,
     required:true
+  },
+  commonTitle:{
+    type:String,
+    required:true
   }
 },
 mounted(){
@@ -248,13 +251,7 @@ methods:{
     this.myChart.setOption(this.option)
     // window.addEventListener("resize",()=>{this.myChart.resize()})
   },
-  getTitle(){
-    let first=new Date(this.firstTime*1000),
-    last =new Date(this.lastTime*1000),
-    firstTimeString=`${weekName[first.getDay()]} ${first.getDate()} ${monthName[first.getMonth()]} ${first.getFullYear()} - `,
-    lastTimeString=`${weekName[last.getDay()]} ${last.getDate()} ${monthName[last.getMonth()]} ${last.getFullYear()}`
-    return firstTimeString+lastTimeString
-  }
+
 },
 computed:{}
 }

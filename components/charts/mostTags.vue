@@ -171,6 +171,10 @@ data(){
   lastTime:{
     type:Number,
     required:true
+  },
+  commonTitle:{
+    type:String,
+    required:true
   }
 },
 mounted(){

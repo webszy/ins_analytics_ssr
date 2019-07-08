@@ -19,6 +19,7 @@
         :chartData=postList 
         :firstTime=firstPostTime
         :lastTime=lastPostTime
+        :commonTitle=commonTitle
         v-if=showMonthlyWeight />
      </div>
      <div class="card">
@@ -27,6 +28,7 @@
         :chartData=postList 
         :firstTime=firstPostTime
         :lastTime=lastPostTime
+         :commonTitle=commonTitle
         v-if=showMonthlyWeight />
      </div>
      <div class="card half">
@@ -35,6 +37,16 @@
         :chartData=postList 
         :firstTime=firstPostTime
         :lastTime=lastPostTime
+         :commonTitle=commonTitle
+        v-if=showMonthlyWeight />
+     </div>
+     <div class="card half">
+      <div class="card-head"></div>
+        <location
+        :chartData=postList 
+        :firstTime=firstPostTime
+        :lastTime=lastPostTime
+        :commonTitle=commonTitle
         v-if=showMonthlyWeight />
      </div>
    </section>
@@ -52,9 +64,11 @@ import {
   getSingleMediaInfo
 } from '@/utils/request'
 import {commonCloneWith} from '@/utils/tools'
+import {weekName,monthName} from '@/utils/variables'
 import MonthlyWeightAverage from '@/components/charts/MonthlyWeightAverage.vue'
 import MonthlyPost from '@/components/charts/MonthlyPost.vue'
 import mostTags from '@/components/charts/mostTags.vue'
+import location from '@/components/charts/location.vue'
 
 export default {
 name:'ProfileAnalytics',
@@ -62,7 +76,8 @@ components:{
   loading,
   MonthlyWeightAverage,
   MonthlyPost,
-  mostTags
+  mostTags,
+  location
 },
 data(){
 return {
@@ -80,7 +95,8 @@ return {
    monthEN:['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sept','Oct','Nov','Dec'],
    showMonthlyWeight:false,
    firstPostTime:0,
-   lastPostTime:0
+   lastPostTime:0,
+   commonTitle:''
   }
  },
 mounted(){
@@ -160,8 +176,7 @@ methods:{
   ckeckComment(){
     let promises=[]
     for(let k of this.postList){
-      let comment=k.edge_media_to_comment
-      
+      let comment=k.edge_media_to_comment   
       if((comment.count>0&&!comment.edges)||comment===undefined){
         let request=getSingleMediaInfo(k.shortcode,k.owner.usernmae)
         promises.push(request)
@@ -199,10 +214,18 @@ methods:{
   // 请求完数据进行的操作，关闭loading，排序postlist
   requestEnd(){
     // 按照升序排列数组
-    this.postList.sort((a,b)=>{return a.taken_at_timestamp-b.taken_at_timestamp})
+    this.postList.sort((a,b)=> a.taken_at_timestamp-b.taken_at_timestamp)
     window.postList=this.postList
     this.firstPostTime=this.postList[0].taken_at_timestamp
     this.lastPostTime=this.postList.slice(-1)[0].taken_at_timestamp
+    /*获取标题*/ 
+    let first=new Date(this.firstPostTime*1000),
+    last =new Date(this.lastPostTime*1000),
+    firstTimeString=`${weekName[first.getDay()]} ${first.getDate()} ${monthName[first.getMonth()]} ${first.getFullYear()} - `,
+    lastTimeString=`${weekName[last.getDay()]} ${last.getDate()} ${monthName[last.getMonth()]} ${last.getFullYear()}`
+
+    this.commonTitle=firstTimeString+lastTimeString
+  
     this.loadingInstance1.close()
     this.showMonthlyWeight=true
   }
@@ -233,11 +256,10 @@ computed:{
   .card{
     width: 100%;
     height: 600px;
-    padding: 30px;
+    padding: 10px;
     box-sizing: border-box;
     border: 1px solid rgba(0,0,0,0.125);
     background-color: #fff;
-    
   }
   .half{
     float: left;

@@ -5,7 +5,8 @@
 
 
 <script>
-import {weekName,monthName} from '@/utils/variables'
+import {monthName} from '@/utils/variables'
+
 export default {
 name:'MonthlyWeightChart',
 data(){
@@ -163,13 +164,17 @@ props:{
   lastTime:{
     type:Number,
     required:true
+  },
+  commonTitle:{
+    type:String,
+    required:true
   }
 },
 mounted(){
   this._initData().then(({xData,yData})=>{
       this.option.xAxis.data=xData
       this.option.series[0].data=yData
-      this.option.title.text=this.getTitle()
+      this.option.title.text=this.commonTitle
       this._initChart()
   })
   .catch(err=>{
@@ -212,13 +217,6 @@ methods:{
     this.myChart=this.$echarts.init(this.$el)
     this.myChart.setOption(this.option)
     // window.addEventListener("resize",()=>{this.myChart.resize()})
-  },
-  getTitle(){
-    let first=new Date(this.firstTime*1000),
-    last =new Date(this.lastTime*1000),
-    firstTimeString=`${weekName[first.getDay()]} ${first.getDate()} ${monthName[first.getMonth()]} ${first.getFullYear()} - `,
-    lastTimeString=`${weekName[last.getDay()]} ${last.getDate()} ${monthName[last.getMonth()]} ${last.getFullYear()}`
-    return firstTimeString+lastTimeString
   }
 },
 computed:{}

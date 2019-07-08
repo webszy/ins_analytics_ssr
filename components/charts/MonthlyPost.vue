@@ -5,7 +5,8 @@
 
 
 <script>
-import {weekName,monthName} from '@/utils/variables'
+import {monthName} from '@/utils/variables'
+
 export default {
 name:'PostAverageChart',
 data(){
@@ -177,6 +178,10 @@ data(){
   lastTime:{
     type:Number,
     required:true
+  },
+  commonTitle:{
+    type:String,
+    required:true
   }
 },
 mounted(){
@@ -186,7 +191,7 @@ mounted(){
       for(let k of yData){
           this.option.series[1].data.push(yData[yData.length-1])
       }
-      this.option.title.text=this.getTitle()
+      this.option.title.text=this.commonTitle
       this._initChart()
   })
   .catch(err=>{
@@ -220,13 +225,6 @@ methods:{
     this.myChart=this.$echarts.init(this.$el)
     this.myChart.setOption(this.option)
     // window.addEventListener("resize",()=>{this.myChart.resize()})
-  },
-  getTitle(){
-    let first=new Date(this.firstTime*1000),
-    last =new Date(this.lastTime*1000),
-    firstTimeString=`${weekName[first.getDay()]} ${first.getDate()} ${monthName[first.getMonth()]} ${first.getFullYear()} - `,
-    lastTimeString=`${weekName[last.getDay()]} ${last.getDate()} ${monthName[last.getMonth()]} ${last.getFullYear()}`
-    return firstTimeString+lastTimeString
   }
  },
 
