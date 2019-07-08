@@ -1,6 +1,6 @@
 <template>
   <div class='myLoading'>
-
+    <img src="../assets/images/loadingCat.gif" alt="">
   </div>
 </template>
 
