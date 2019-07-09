@@ -257,7 +257,7 @@ methods:{
     this.myChart=null
     this.myChart=this.$echarts.init(this.$el)
     this.myChart.setOption(this.option)
-    // window.addEventListener("resize",()=>{this.myChart.resize()})
+    window.addEventListener("resize",()=>{this.myChart.resize()})
   },
 }
 }
