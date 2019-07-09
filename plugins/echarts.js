@@ -7,4 +7,4 @@ if (process.client) {
   window.echarts=echarts
   require('echarts-wordcloud')
 }
- Vue.prototype.$echarts= echarts
+Vue.prototype.$echarts= echarts

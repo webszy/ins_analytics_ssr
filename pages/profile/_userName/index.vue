@@ -1,42 +1,26 @@
 <template>
   <section class='profilePage'>
-   <section class="info">
-     <div>
-       <header> <img :src="userPic" > {{this.userName}}</header>
-       <p>{{userBio}}</p>
-     </div>
-     <div>
-       <p>posts:{{postList.length}}</p>
-       <p>Followers:{{followers}}</p>
-       <p>Following:{{following}}</p>
-     </div>
-     <div></div>
-   </section>
-   <section class="charts">
-      <div class="card">
-      <div class="card-head"></div>
-        <monthly-weight-average
-        ref='chart'
-        :chartData=postList 
-        :firstTime=firstPostTime
-        :lastTime=lastPostTime
-        :commonTitle=commonTitle
-        v-if=showChart />
-     </div>
-     <div class="card">
-      <div class="card-head"></div>
-        <monthly-post
-        ref='chart'
-        :chartData=postList 
-        :firstTime=firstPostTime
-        :lastTime=lastPostTime
-         :commonTitle=commonTitle
-        v-if=showChart />
-     </div>
-     <div class="clearfix">
-        <div class="card half">
+    <header class="tab">
+      <button @click="showOverview=true;showTop=false">Overview</button>
+      <button @click="showOverview=false;showTop=true">Top Posts</button>
+    </header>
+    <section class="overview" v-if=showOverview>
+      <section class="info">
+        <div>
+          <header> <img :src="userPic" > {{this.userName}}</header>
+          <p>{{userBio}}</p>
+        </div>
+        <div>
+          <p>posts:{{postList.length}}</p>
+          <p>Followers:{{followers}}</p>
+          <p>Following:{{following}}</p>
+        </div>
+        <div></div>
+      </section>
+      <section class="charts">
+          <div class="card">
           <div class="card-head"></div>
-            <most-tags
+            <monthly-weight-average
             ref='chart'
             :chartData=postList 
             :firstTime=firstPostTime
@@ -44,48 +28,91 @@
             :commonTitle=commonTitle
             v-if=showChart />
         </div>
-        <div class="card half">
+        <div class="card">
           <div class="card-head"></div>
-            <location
+            <monthly-post
+            ref='chart'
             :chartData=postList 
             :firstTime=firstPostTime
             :lastTime=lastPostTime
             :commonTitle=commonTitle
             v-if=showChart />
         </div>
-     </div>
-     <div class="card">
-      <div class="card-head"></div>
-        <post-like-and-comment-by-type
-        ref='chart'
-        :chartData=postList 
-        :firstTime=firstPostTime
-        :lastTime=lastPostTime
-        :commonTitle=commonTitle
-        v-if=showChart />
-     </div>
-     <div class="card">
-      <div class="card-head"></div>
-      <posting-activity
-        ref='chart'
-        :chartData=postList 
-        :firstTime=firstPostTime
-        :lastTime=lastPostTime
-        :commonTitle=commonTitle
-        v-if=showChart />
-     </div>
-      <div class="card">
-      <div class="card-head"></div>
-      <total-post-weekly
-        ref='chart'
-        :chartData=postList 
-        :firstTime=firstPostTime
-        :lastTime=lastPostTime
-        :commonTitle=commonTitle
-        v-if=showChart />
-     </div>
-   </section>
+        <div class="clearfix">
+            <div class="card half">
+              <div class="card-head"></div>
+                <most-tags
+                ref='chart'
+                :chartData=postList 
+                :firstTime=firstPostTime
+                :lastTime=lastPostTime
+                :commonTitle=commonTitle
+                v-if=showChart />
+            </div>
+            <div class="card half">
+              <div class="card-head"></div>
+                <location
+                :chartData=postList 
+                :firstTime=firstPostTime
+                :lastTime=lastPostTime
+                :commonTitle=commonTitle
+                v-if=showChart />
+            </div>
+        </div>
+        <div class="card">
+          <div class="card-head"></div>
+            <post-like-and-comment-by-type
+            ref='chart'
+            :chartData=postList 
+            :firstTime=firstPostTime
+            :lastTime=lastPostTime
+            :commonTitle=commonTitle
+            v-if=showChart />
+        </div>
+        <div class="card">
+          <div class="card-head"></div>
+          <posting-activity
+            ref='chart'
+            :chartData=postList 
+            :firstTime=firstPostTime
+            :lastTime=lastPostTime
+            :commonTitle=commonTitle
+            v-if=showChart />
+        </div>
+          <div class="card">
+          <div class="card-head"></div>
+          <total-post-weekly
+            ref='chart'
+            :chartData=postList 
+            :firstTime=firstPostTime
+            :lastTime=lastPostTime
+            :commonTitle=commonTitle
+            v-if=showChart />
+        </div>
+        <div class="card">
+          <div class="card-head"></div>
+          <tag-cloud
+            ref='chart'
+            :chartData=postList 
+            :firstTime=firstPostTime
+            :lastTime=lastPostTime
+            :commonTitle=commonTitle
+            v-if=showChart />
+        </div>
+        </section>
+
+    </section>
+    <section class="topPost" v-if=showTop>
+      <top-post
+       :chartData=postList
+       sortType="weight"
+      />
+
+    </section>
+  
+  
   </section>
+  
 </template>
 
 
@@ -107,6 +134,9 @@ import location from '@/components/charts/location.vue'
 import postLikeAndCommentByType from '@/components/charts/postLikeAndCommentBytype.vue'
 import PostingActivity from '@/components/charts/PostingActivity.vue'
 import TotalPostWeekly from '@/components/charts/TotalPostWeekly.vue'
+import TagCloud from '@/components/charts/TagCloud.vue'
+
+import topPost from '@/components/topPost.vue'
 
 export default {
 name:'ProfileAnalytics',
@@ -118,7 +148,9 @@ components:{
   location,
   postLikeAndCommentByType,
   PostingActivity,
-  TotalPostWeekly
+  TotalPostWeekly,
+  topPost,
+  TagCloud
 },
 data(){
 return {
@@ -137,7 +169,9 @@ return {
    showChart:false,
    firstPostTime:0,
    lastPostTime:0,
-   commonTitle:''
+   commonTitle:'',
+   showOverview:true,
+   showTop:false
   }
  },
 mounted(){
@@ -235,7 +269,6 @@ methods:{
           shortcode=k.data.entry_data.PostPage[0].graphql.shortcode_media.shortcode,
           len=this.postList.length
           
-
           for(let i=0;i<len;i++){
             let item = this.postList[i]
             if(item.shortcode===shortcode&&data!==undefined){
@@ -283,6 +316,18 @@ computed:{
   width: 57.8125%;
   height: 100%;
   margin: 0 auto;
+  .overview{
+     width: 100%;
+  }
+  .tab{
+    display: flex;
+    button{
+       padding:20px;
+       border:1px solid salmon;
+      background: transparent;
+      outline: none;
+    }
+  }
   .info{
     width: 100%;
     display:flex;

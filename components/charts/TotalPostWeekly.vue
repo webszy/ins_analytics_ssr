@@ -47,6 +47,7 @@ data(){
           containLabel: true,
           z: 22
       },
+        
       xAxis: {
           type: 'category',
           gridIndex: 0,

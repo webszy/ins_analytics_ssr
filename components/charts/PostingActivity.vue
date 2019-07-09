@@ -17,23 +17,21 @@ return {
     tooltip: {
         position: 'top',
         formatter:function(param){
-                    console.log(param.data[2])
-                    if(param.data[2]==0){
-                        return '0'
-                    }
-                }
+            if(param.data[2]==0){
+              return '0'
+            }
+        }
     },
     animation: false,
     title:{
       text:'Posting Activity',
       subtext:'Posting times on Profile',
-      left:'5%',
-      
+      left:'5%',  
     },
     grid: {
-       left: '5%',
+       left: '3%',
           top: '10%',
-          right: '5%',
+          right: '8%',
           bottom: '8%',
           containLabel: true
     },
@@ -53,25 +51,23 @@ return {
      },
     
     visualMap: [{
-        show:false,
+        show:true,
         min: 0,
         max: 10,
         range:[1,10],
         calculable: true,
-        controller:false,
-        orient: 'horizontal',
-        left: 'center',
-        bottom: '15%'
+        orient: 'vertical',
+        right: '2%',
+        bottom: '8%'
     }],
     series: [{
-        name: 'Punch Card',
+        name: 'Post Count',
         type: 'heatmap',
         data: [],
         label: {
             normal: {
                 show: true,
                 formatter:function(param){
-                    console.log(param.data[2])
                     if(param.data[2]==0){
                         return '0'
                     }
@@ -79,10 +75,10 @@ return {
             }
         },
         itemStyle: {
-                    opacity:function(){
-                    if(param.data[2]==0){
-                        return 0
-                    }
+            opacity:function(){
+            if(param.data[2]==0){
+                return 0
+            }
             },
             emphasis: {
                 shadowBlur:10,
@@ -141,7 +137,6 @@ methods:{
           if(!baseData[k][i]){baseData[k][i]='0'}
         }
       }
-      console.log("TCL: _initData -> baseData", baseData)
       let yData=[]
       for(let k in baseData){
         for(let n in baseData[k]){
