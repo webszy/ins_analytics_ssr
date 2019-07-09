@@ -12,7 +12,85 @@ export default {
 name:'PostingActivity',
 data(){
 return {
-  myChart:null
+  myChart:null,
+  option : {
+    tooltip: {
+        position: 'top',
+        formatter:function(param){
+                    console.log(param.data[2])
+                    if(param.data[2]==0){
+                        return '0'
+                    }
+                }
+    },
+    animation: false,
+    title:{
+      text:'Posting Activity',
+      subtext:'Posting times on Profile',
+      left:'5%',
+      
+    },
+    grid: {
+       left: '5%',
+          top: '10%',
+          right: '5%',
+          bottom: '8%',
+          containLabel: true
+    },
+    xAxis: {
+        type: 'category',
+        data: weekName,
+        splitArea: {
+            show: true
+        }
+    },
+    yAxis: {
+        type: 'category',
+        data: hours,
+        splitArea: {
+            show: true
+        }
+     },
+    
+    visualMap: [{
+        show:false,
+        min: 0,
+        max: 10,
+        range:[1,10],
+        calculable: true,
+        controller:false,
+        orient: 'horizontal',
+        left: 'center',
+        bottom: '15%'
+    }],
+    series: [{
+        name: 'Punch Card',
+        type: 'heatmap',
+        data: [],
+        label: {
+            normal: {
+                show: true,
+                formatter:function(param){
+                    console.log(param.data[2])
+                    if(param.data[2]==0){
+                        return '0'
+                    }
+                }
+            }
+        },
+        itemStyle: {
+                    opacity:function(){
+                    if(param.data[2]==0){
+                        return 0
+                    }
+            },
+            emphasis: {
+                shadowBlur:10,
+                shadowColor: 'rgba(0, 0, 0, 0.5)'
+            }
+        }
+    }]
+}
   }
  },
 props:{
@@ -34,37 +112,54 @@ props:{
   }
 },
 mounted(){
- this._initData().then(datas=>{
-      // this.option.series[0].data=typeImg
-      // this.option.series[1].data=typeVideo
-      // this._initChart()
+ this._initData().then(yData=>{
+      this.option.series[0].data=yData
+      this._initChart()
   })
 },
 methods:{
   _initData(){
     return new Promise((resolve,reject)=>{
-      // [[weekname,hours,data]],
+      // [[hours,weekname,data]],
       let baseData={}
       for(let k of this.chartData){
         let d=new Date(k.taken_at_timestamp*1000),
-        week=weekname[d.getDay()],
-        hour=d.getHours()==0?d.getHours()+1:d.getHours()
+        week=weekName[d.getDay()],
+        hour=d.getHours()===0?22:d.getHours()-1,
+        hourName=hours[hour]
+        if(hour===-1){console.log(k.taken_at_timestamp*1000)}
         if(!baseData[week]){baseData[week]={}}
-        if(baseData[week][hour]){
-          baseData[week][hour]++
+        if(baseData[week][hourName]){
+          baseData[week][hourName]++
         }else{
-           baseData[week][hour]=1
+           baseData[week][hourName]=1
+        }
+      }
+      // 不存在的数据补0
+      for(let k in baseData){
+        for(let i of hours){
+          if(!baseData[k][i]){baseData[k][i]='0'}
+        }
+      }
+      console.log("TCL: _initData -> baseData", baseData)
+      let yData=[]
+      for(let k in baseData){
+        for(let n in baseData[k]){
+          let weekIndex=weekName.indexOf(k),
+          hourIndex=hours.indexOf(n)
+          let one=[weekIndex,hourIndex,baseData[k][n]]
+          yData.push(one)
         }
       }
 
-      resolve(datas)
+      resolve(yData)
     })
   },
 _initChart(){
     this.myChart=null
     this.myChart=this.$echarts.init(this.$el)
     this.myChart.setOption(this.option)
-    // window.addEventListener("resize",()=>{this.myChart.resize()})
+    window.addEventListener("resize",()=>{this.myChart.resize()})
   },
  },
 computed:{}
