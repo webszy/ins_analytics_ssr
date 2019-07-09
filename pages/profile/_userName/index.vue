@@ -16,6 +16,7 @@
       <div class="card">
       <div class="card-head"></div>
         <monthly-weight-average
+        ref='chart'
         :chartData=postList 
         :firstTime=firstPostTime
         :lastTime=lastPostTime
@@ -25,6 +26,7 @@
      <div class="card">
       <div class="card-head"></div>
         <monthly-post
+        ref='chart'
         :chartData=postList 
         :firstTime=firstPostTime
         :lastTime=lastPostTime
@@ -35,6 +37,7 @@
         <div class="card half">
           <div class="card-head"></div>
             <most-tags
+            ref='chart'
             :chartData=postList 
             :firstTime=firstPostTime
             :lastTime=lastPostTime
@@ -54,6 +57,7 @@
      <div class="card">
       <div class="card-head"></div>
         <post-like-and-comment-by-type
+        ref='chart'
         :chartData=postList 
         :firstTime=firstPostTime
         :lastTime=lastPostTime
@@ -62,7 +66,13 @@
      </div>
      <div class="card">
       <div class="card-head"></div>
-      
+      <posting-activity
+        ref='chart'
+        :chartData=postList 
+        :firstTime=firstPostTime
+        :lastTime=lastPostTime
+        :commonTitle=commonTitle
+        v-if=showChart />
      </div>
    </section>
   </section>
@@ -85,6 +95,7 @@ import MonthlyPost from '@/components/charts/MonthlyPost.vue'
 import mostTags from '@/components/charts/mostTags.vue'
 import location from '@/components/charts/location.vue'
 import postLikeAndCommentByType from '@/components/charts/postLikeAndCommentBytype.vue'
+import PostingActivity from '@/components/charts/PostingActivity.vue'
 
 export default {
 name:'ProfileAnalytics',
@@ -95,6 +106,7 @@ components:{
   mostTags,
   location,
   postLikeAndCommentByType,
+  PostingActivity
 },
 data(){
 return {
@@ -121,6 +133,7 @@ mounted(){
    this.loadingInstance1=Loading.service({ fullscreen: true,lock: true,text:'拉取 '+this.userName+' 的数据' });
    this.getProfileData(this.userName)
   }
+
 },
 methods:{
   getProfileData(usernmae){
@@ -245,6 +258,7 @@ methods:{
   
     this.loadingInstance1.close()
     this.showChart=true
+    
   }
 },
 computed:{
