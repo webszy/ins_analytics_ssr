@@ -60,7 +60,15 @@
         :commonTitle=commonTitle
         v-if=showChart />
      </div>
-
+     <div class="card">
+      <div class="card-head"></div>
+        <who-comment-most
+        :chartData=postList 
+        :firstTime=firstPostTime
+        :lastTime=lastPostTime
+        :commonTitle=commonTitle
+        v-if=showChart />
+     </div>
    </section>
   </section>
 </template>
@@ -82,6 +90,7 @@ import MonthlyPost from '@/components/charts/MonthlyPost.vue'
 import mostTags from '@/components/charts/mostTags.vue'
 import location from '@/components/charts/location.vue'
 import postLikeAndCommentByType from '@/components/charts/postLikeAndCommentBytype.vue'
+import WhoCommentMost from '@/components/charts/WhoCommentMost.vue'
 
 export default {
 name:'ProfileAnalytics',
@@ -91,7 +100,8 @@ components:{
   MonthlyPost,
   mostTags,
   location,
-  postLikeAndCommentByType
+  postLikeAndCommentByType,
+  WhoCommentMost
 },
 data(){
 return {

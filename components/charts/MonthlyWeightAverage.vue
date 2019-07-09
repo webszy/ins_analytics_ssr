@@ -39,11 +39,11 @@ return {
         trigger:'axis',
         axisPointer: {
             type: 'line',
-            lineStyle: {
-                opacity: 0
-            }
         },
         formatter: "{a} on {b}: {c}"
+    },
+    legend: {
+        data:['Likes','Comments']
     },
     grid: {
         top: '10%',
