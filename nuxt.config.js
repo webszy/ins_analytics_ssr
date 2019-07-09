@@ -28,7 +28,8 @@ module.exports = {
   ** Global CSS
   */
   css: [
-    'element-ui/lib/theme-chalk/index.css'
+    'element-ui/lib/theme-chalk/index.css',
+    './assets/css/swiper.min.css',
   ],
 
   /*
@@ -36,7 +37,8 @@ module.exports = {
   */
   plugins: [
     '@/plugins/element-ui',
-    '@/plugins/echarts'
+    '@/plugins/echarts',
+    { src: '~/plugins/swiper.js', ssr: false },
   ],
 
   /*
