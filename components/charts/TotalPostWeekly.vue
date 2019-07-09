@@ -5,10 +5,10 @@
 
 
 <script>
-import {monthName} from '@/utils/variables'
+import {weekName} from '@/utils/variables'
 
 export default {
-name:'PostAverageChart',
+name:'TotalPostWeekly',
 data(){
   return {
     myChart:null,
@@ -28,12 +28,13 @@ data(){
           }
       },
       title:{
-        text:'',
-        right: "4%",
-        bottom: "2%",
+        text:'Total Posts',
+        subtext:'Weekday Breakdown',
+        left: "4%",
+        top: "2%",
         textStyle: {
             color: "#fff",
-            fontSize: 13,
+            fontSize: 20,
             fontWeight:100,
         }
       },
@@ -41,15 +42,15 @@ data(){
           left: '5%',
           right: '5%',
           bottom: '5%',
-          top: '7%',
-          height: '85%',
+          top: '15%',
+        //   height: '85%',
           containLabel: true,
           z: 22
       },
       xAxis: {
           type: 'category',
           gridIndex: 0,
-          data: [],
+          data: weekName,
           axisTick: {
               alignWithLabel: true
           },
@@ -74,9 +75,9 @@ data(){
                   show: false
               },
               axisLine: {
-                  lineStyle: {
-                      color: '#0c3b71'
-                  }
+                //   lineStyle: {
+                //       color: '#0c3b71'
+                //   }
               },
               axisLabel: {
                   color: 'rgb(170,170,170)',
@@ -144,12 +145,13 @@ data(){
               },
               data: [],
               zlevel: 11,
-              markLine: {
-                data: [{
-                    type: 'average',
-                    name: 'average'
-                }]
-            },
+               markLine: {
+            data: [{
+                type: 'average',
+                name: 'average'
+            }]
+        },
+
           },
           {
               name: 'bg',
@@ -183,20 +185,14 @@ data(){
   lastTime:{
     type:Number,
     required:true
-  },
-  commonTitle:{
-    type:String,
-    required:true
   }
 },
 mounted(){
-  this._initData().then(({xData,yData})=>{
-      this.option.xAxis.data=xData
+  this._initData().then(yData=>{
       this.option.series[0].data=yData
       for(let k of yData){
           this.option.series[1].data.push(yData[yData.length-1])
       }
-      this.option.title.text=this.commonTitle
       this._initChart()
   })
   .catch(err=>{
@@ -207,23 +203,21 @@ mounted(){
 methods:{
   _initData(){
      return new Promise((resolve,reject)=>{
-        let baseData={},xData=[],yData=[]
+        let baseData={},yData=[]
         for(let k of this.chartData){
             let d=new Date(k.taken_at_timestamp*1000),
-            month=d.getMonth(),
-            year=(d.getFullYear()+'').substr(-2),
-            monthStr=monthName[month]+"'"+year
-            if(!baseData[monthStr]){
-                baseData[monthStr]=1
+            week=weekName[d.getDay()]
+            if(baseData[week]){
+                baseData[week]++
             }else{
-              baseData[monthStr]++
+                baseData[week]=1
             }
         }
-        for(let k in baseData){
-            xData.push(k)
-            yData.push(baseData[k])
+        for(let k of weekName){
+            let num=baseData[k]||0
+          yData.push(num)
         }
-        resolve({xData,yData})
+        resolve(yData)
     })
   },
   _initChart(){

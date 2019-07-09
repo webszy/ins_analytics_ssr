@@ -74,6 +74,16 @@
         :commonTitle=commonTitle
         v-if=showChart />
      </div>
+      <div class="card">
+      <div class="card-head"></div>
+      <total-post-weekly
+        ref='chart'
+        :chartData=postList 
+        :firstTime=firstPostTime
+        :lastTime=lastPostTime
+        :commonTitle=commonTitle
+        v-if=showChart />
+     </div>
    </section>
   </section>
 </template>
@@ -96,6 +106,7 @@ import mostTags from '@/components/charts/mostTags.vue'
 import location from '@/components/charts/location.vue'
 import postLikeAndCommentByType from '@/components/charts/postLikeAndCommentBytype.vue'
 import PostingActivity from '@/components/charts/PostingActivity.vue'
+import TotalPostWeekly from '@/components/charts/TotalPostWeekly.vue'
 
 export default {
 name:'ProfileAnalytics',
@@ -106,7 +117,8 @@ components:{
   mostTags,
   location,
   postLikeAndCommentByType,
-  PostingActivity
+  PostingActivity,
+  TotalPostWeekly
 },
 data(){
 return {
