@@ -14,15 +14,7 @@ return {
   myChart:null,
  
   option :{
-    backgroundColor: new this.$echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-            offset: 0,
-            color: '#c86589'
-        },
-        {
-            offset: 1,
-            color: '#06a7ff'
-        }
-    ], false),
+    backgroundColor: '#fff',
     title: {
         text: "",
         right: "4%",
@@ -58,11 +50,11 @@ return {
         data: [],
         axisLabel: {
             margin: 30,
-            color: '#ffffff63'
+            color: '#666'
         },
         axisLine: {
             lineStyle: {
-                color: '#fff',
+                color: '#666',
                 width: 2
             }
         },
@@ -70,7 +62,7 @@ return {
             show: true,
             length: 25,
             lineStyle: {
-                color: "#ffffff1f"
+                color: "#666"
             }
         }
     },
@@ -79,24 +71,24 @@ return {
         position: 'left',
         axisLabel: {
             margin: 20,
-            color: '#ffffff63'
+            color: '#666'
         },
         axisTick: {
             show: true,
             length: 15,
             lineStyle: {
-                color: "#ffffff1f",
+                color: "#666",
             }
         },
         splitLine: {
             show: true,
             lineStyle: {
-                color: '#ffffff1f'
+                color: '#666'
             }
         },
         axisLine: {
             lineStyle: {
-                color: '#fff',
+                color: '#666',
                 width: 2
             }
         }
@@ -110,19 +102,19 @@ return {
         symbolSize: 6,
         lineStyle: {
             normal: {
-                color: "#fff", // 线条颜色
+                color: "#666", // 线条颜色
             },
         },
         label: {
             show: true,
             position: 'top',
             textStyle: {
-                color: '#fff',
+                color: '#666',
             }
         },
         itemStyle: {
             color: "red",
-            borderColor: "#fff",
+            borderColor: "#666",
             borderWidth: 3
         },
         tooltip: {
@@ -158,19 +150,19 @@ return {
         symbolSize: 6,
         lineStyle: {
             normal: {
-                color: "#fff", // 线条颜色
+                color: "#666", // 线条颜色
             },
         },
         label: {
             show: true,
             position: 'top',
             textStyle: {
-                color: '#fff',
+                color: '#666',
             }
         },
         itemStyle: {
             color: "red",
-            borderColor: "#fff",
+            borderColor: "#666",
             borderWidth: 3
         },
         tooltip: {
