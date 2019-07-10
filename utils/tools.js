@@ -49,3 +49,7 @@ export function bubbleSort(arr) {
      }
      return arr;
 }
+export function parseNum(num) {
+  // 数字每三位加逗号
+ return (num || 0).toString().replace(/(\d)(?=(?:\d{3})+$)/g, '$1,')
+}

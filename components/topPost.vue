@@ -1,13 +1,24 @@
 <template>
   <div class='post' v-if="userPost.length">
+    <div class="titles">
+      <h4>{{title}}</h4>
+      <h5>{{timeTitle}}</h5>
+    </div>
+    
      <div class="post_swiper">
        <div v-swiper:mySwiper="swiperOptions" >
             <div class="swiper-wrapper">
                <div class="swiper-slide" v-for="(k,i) in userPost" :key=i>
-                 <s-image :src=k.src :width='420' :height='420'/>
-
+                 <s-image :src=k.src :width='420' :height='420' :index=i />
+                 
+                 <div class="nums">
+                   <div class="num">
+                     <p></p>
+                     <span></span>
+                   </div>
+                 </div>
                </div>
-               <div class="swiper-pagination"></div>
+               
             </div>
        </div>
      </div>
@@ -18,6 +29,7 @@
 <script>
 import {hours,monthName,weekName} from '../utils/variables'
 import sImage from './sImage'
+import {parseNum} from '../utils/tools'
 export default {
 name:'TopPost',
 components:{sImage},
@@ -49,6 +61,14 @@ props:{
   },
   sortType:{
     type:String,
+    required:true
+  },
+  timeTitle:{
+    type:String,
+    required:true
+  },
+  title:{
+     type:String,
     required:true
   }
  },
@@ -121,14 +141,45 @@ computed:{}
 }
 </script>
 
-<style lang="scss">
+<style>
 .post{
-  .swiper-slide{
-    width: 451px;
-    height: 846px;
-    border:2px solid #e9eaec;
-  }
+  padding-top: 38px;
 }
-
+.post .titles{
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+.post h4{
+  font-size:24px;
+  font-family:PingFangSC-Medium;
+  font-weight:500;
+  color:#050505;
+  line-height:33px;
+  margin-bottom: 34px;
+  text-indent: 21px;
+}
+.post h5{
+font-size:24px;
+font-family:PingFangSC-Semibold;
+font-weight:600;
+color:#8F8F8F;
+line-height:33px;
+}
+.swiper-slide{
+   width: 451px;
+   /* height: 846px; */
+   border:2px solid #e9eaec;
+   display: flex;
+   flex-direction: column;
+   justify-content: flex-start;
+   align-items: center;
+   padding-top:30px;
+   position: relative;
+ }
+.swiper-slide img{
+ width: 420px;
+ height: 420px;
+}
 
 </style>

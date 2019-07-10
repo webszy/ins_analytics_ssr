@@ -1,47 +1,59 @@
 <template>
   <section class='profilePage'>
-    <header class="tab">
-      <button @click="showOverview=true;showTop=false">Overview</button>
-      <button @click="showOverview=false;showTop=true">Top Posts</button>
-    </header>
-    <section class="overview" v-if=showOverview>
-      <section class="info">
-        <div>
-          <header> <img :src="userPic" > {{this.userName}}</header>
-          <p>{{userBio}}</p>
-        </div>
-        <div>
-          <p>posts:{{postList.length}}</p>
-          <p>Followers:{{followers}}</p>
-          <p>Following:{{following}}</p>
-        </div>
-        <div></div>
-      </section>
-      <section class="charts">
-          <div class="card">
-          <div class="card-head"></div>
-            <monthly-weight-average
-            ref='chart'
-            :chartData=postList 
-            :firstTime=firstPostTime
-            :lastTime=lastPostTime
-            :commonTitle=commonTitle
-            v-if=showChart />
-        </div>
-        <div class="card">
-          <div class="card-head"></div>
-            <monthly-post
-            ref='chart'
-            :chartData=postList 
-            :firstTime=firstPostTime
-            :lastTime=lastPostTime
-            :commonTitle=commonTitle
-            v-if=showChart />
-        </div>
-        <div class="clearfix">
-            <div class="card half">
+    <common-head></common-head>
+    <section class="wrap" :style="styleWhenShowOverview">
+       <section class="userInfo">
+            <div class="info"> 
+              <img :src="userPic">
+              <div>
+                <p>@{{userName}}</p>
+                <p>{{userBio}}</p>
+              </div>
+            </div>
+            <div class="tab">
+              <button :class="showOverview?'selected':''" @click="showOverview=true">Overview</button>
+              <button :class="!showOverview?'selected':''" @click="showOverview=false">Top Posts</button>
+            </div>
+          </section>
+
+      <section class="overView"  v-if="showOverview">
+         
+          <section class="audience">
+            <h4>Audience</h4>
+            <div class="nums">
+              <div class="num">
+                <img src="../../../assets/images/post_ic.png">
+                <p>{{postCount}}</p>
+                <span>Posts</span>
+              </div>
+              <div class="num">
+                <img src="../../../assets/images/follower_ic.png">
+                <p>{{followers}}</p>
+                <span>Followers</span>
+              </div>
+              <div class="num">
+                <img src="../../../assets/images/following_ic.png">
+                <p>{{following}}</p>
+                <span>Following</span>
+              </div>
+            </div>
+          
+          </section>
+
+          <section class="charts">
+              <div class="card">
+                <div class="card-head"></div>
+                  <monthly-weight-average
+                  ref='chart'
+                  :chartData=postList 
+                  :firstTime=firstPostTime
+                  :lastTime=lastPostTime
+                  :commonTitle=commonTitle
+                  v-if=showChart />
+            </div>
+            <div class="card">
               <div class="card-head"></div>
-                <most-tags
+                <monthly-post
                 ref='chart'
                 :chartData=postList 
                 :firstTime=firstPostTime
@@ -49,68 +61,87 @@
                 :commonTitle=commonTitle
                 v-if=showChart />
             </div>
-            <div class="card half">
+            <div class="clearfix">
+                <div class="card half">
+                  <div class="card-head"></div>
+                    <most-tags
+                    ref='chart'
+                    :chartData=postList 
+                    :firstTime=firstPostTime
+                    :lastTime=lastPostTime
+                    :commonTitle=commonTitle
+                    v-if=showChart />
+                </div>
+                <div class="card half">
+                  <div class="card-head"></div>
+                    <location
+                    :chartData=postList 
+                    :firstTime=firstPostTime
+                    :lastTime=lastPostTime
+                    :commonTitle=commonTitle
+                    v-if=showChart />
+                </div>
+            </div>
+            <div class="card">
               <div class="card-head"></div>
-                <location
+                <post-like-and-comment-by-type
+                ref='chart'
                 :chartData=postList 
                 :firstTime=firstPostTime
                 :lastTime=lastPostTime
                 :commonTitle=commonTitle
                 v-if=showChart />
             </div>
-        </div>
-        <div class="card">
-          <div class="card-head"></div>
-            <post-like-and-comment-by-type
-            ref='chart'
-            :chartData=postList 
-            :firstTime=firstPostTime
-            :lastTime=lastPostTime
-            :commonTitle=commonTitle
-            v-if=showChart />
-        </div>
-        <div class="card">
-          <div class="card-head"></div>
-          <posting-activity
-            ref='chart'
-            :chartData=postList 
-            :firstTime=firstPostTime
-            :lastTime=lastPostTime
-            :commonTitle=commonTitle
-            v-if=showChart />
-        </div>
-          <div class="card">
-          <div class="card-head"></div>
-          <total-post-weekly
-            ref='chart'
-            :chartData=postList 
-            :firstTime=firstPostTime
-            :lastTime=lastPostTime
-            :commonTitle=commonTitle
-            v-if=showChart />
-        </div>
-        <div class="card">
-          <div class="card-head"></div>
-          <tag-cloud
-            ref='chart'
-            :chartData=postList 
-            :firstTime=firstPostTime
-            :lastTime=lastPostTime
-            :commonTitle=commonTitle
-            v-if=showChart />
-        </div>
-        </section>
-
+            <div class="card">
+              <div class="card-head"></div>
+              <posting-activity
+                ref='chart'
+                :chartData=postList 
+                :firstTime=firstPostTime
+                :lastTime=lastPostTime
+                :commonTitle=commonTitle
+                v-if=showChart />
+            </div>
+              <div class="card">
+              <div class="card-head"></div>
+              <total-post-weekly
+                ref='chart'
+                :chartData=postList 
+                :firstTime=firstPostTime
+                :lastTime=lastPostTime
+                :commonTitle=commonTitle
+                v-if=showChart />
+            </div>
+            <div class="card">
+              <div class="card-head"></div>
+              <tag-cloud
+                ref='chart'
+                :chartData=postList 
+                :firstTime=firstPostTime
+                :lastTime=lastPostTime
+                :commonTitle=commonTitle
+                v-if=showChart />
+            </div>
+          </section>
+      </section>
+      <section class="topPost" v-if="!showOverview">
+            <top-post
+            :chartData=postList
+            :timeTitle=commonTitle
+            title="Highest Engagement（likes+Comments)"
+            sortType="weight"
+            />
+      </section>
     </section>
-    <section class="topPost" v-if=showTop>
-      <top-post
-       :chartData=postList
-       sortType="weight"
-      />
 
-    </section>
-  
-  
+    <!-- loading -->
+     <transition     
+      enter-active-class="animated faster fadeIn"
+      leave-active-class="animated faster fadeOut"
+    >
+      <loading v-if="showLoading"></loading>
+    </transition>
+    
   </section>
   
 </template>
@@ -125,7 +156,7 @@ import {
   getNextPageData,
   getSingleMediaInfo
 } from '@/utils/request'
-import {commonCloneWith} from '@/utils/tools'
+import {parseNum} from '@/utils/tools'
 import {weekName,monthName} from '@/utils/variables'
 import MonthlyWeightAverage from '@/components/charts/MonthlyWeightAverage.vue'
 import MonthlyPost from '@/components/charts/MonthlyPost.vue'
@@ -135,13 +166,13 @@ import postLikeAndCommentByType from '@/components/charts/postLikeAndCommentByty
 import PostingActivity from '@/components/charts/PostingActivity.vue'
 import TotalPostWeekly from '@/components/charts/TotalPostWeekly.vue'
 import TagCloud from '@/components/charts/TagCloud.vue'
-
 import topPost from '@/components/topPost.vue'
-
+import commonHead from '@/components/commonHead'
 export default {
 name:'ProfileAnalytics',
 components:{
   loading,
+  commonHead,
   MonthlyWeightAverage,
   MonthlyPost,
   mostTags,
@@ -154,29 +185,28 @@ components:{
 },
 data(){
 return {
-   loadingInstance1:null,
    userName:this.$route.params.userName||'',
    profile:null,
    hasNextPage:false,
    end_cursor:'',
    queryIdList:[],
    postList:[],
-   userPic:'',
    userBio:'',
    followers:0,
    following:0,
-   monthEN:['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sept','Oct','Nov','Dec'],
+   postCount:0,
+   userPic:require('../../../assets/images/userPic.png'),
    showChart:false,
    firstPostTime:0,
    lastPostTime:0,
    commonTitle:'',
-   showOverview:true,
-   showTop:false
+   showOverview:false,
+   showLoading:false
   }
  },
 mounted(){
   if(this.userName!=''){
-   this.loadingInstance1=Loading.service({ fullscreen: true,lock: true,text:'拉取 '+this.userName+' 的数据' });
+    this.showLoading=true
    this.getProfileData(this.userName)
   }
 
@@ -191,8 +221,9 @@ methods:{
       if(this.userBio.length===0){
         this.userBio='No Instagram BIO'
       }
-      this.followers=res.data.entry_data.ProfilePage[0].graphql.user.edge_followed_by.count
-      this.following=res.data.entry_data.ProfilePage[0].graphql.user.edge_follow.count
+      this.followers=parseNum(res.data.entry_data.ProfilePage[0].graphql.user.edge_followed_by.count)
+      this.following=parseNum(res.data.entry_data.ProfilePage[0].graphql.user.edge_follow.count)
+      this.postCount=parseNum(res.data.entry_data.ProfilePage[0].graphql.user.edge_owner_to_timeline_media.count)
       this.hasNextPage=res.data.entry_data.ProfilePage[0].graphql.user.edge_owner_to_timeline_media.page_info.has_next_page
       this.end_cursor=res.data.entry_data.ProfilePage[0].graphql.user.edge_owner_to_timeline_media.page_info.end_cursor
       this.handlePostEdges(res.data.entry_data.ProfilePage[0].graphql.user.edge_owner_to_timeline_media.edges)
@@ -231,21 +262,6 @@ methods:{
   handlePostEdges(edges){
     for(let k of edges){
       this.postList.push(k.node)
-      /*
-      let obj={}
-      obj.commentCount=k.node.edge_media_to_comment.count
-      obj.likeCount=k.node.edge_media_preview_like.count
-      obj.createAt=k.node.taken_at_timestamp*1000
-      obj.shortcode=k.node.shortcode
-      obj.id=k.node.id
-      obj.location=k.location||''
-      if(k.node.thumbnail_resources&&k.node.thumbnail_resources[0]){
-        obj.src=k.node.thumbnail_resources[0].src
-      }else{
-         obj.src=k.node.display_url
-      }
-      this.postList.push(obj)
-      */
     }
   },
   // 发现拉取首页时，没有评论的详细信息，需要通过shortcode获取一遍，query接口的时候是有详细信息的
@@ -262,7 +278,6 @@ methods:{
     if(promises.length){
       Promise.all(promises)
       .then(res=>{
-        // this.loadingInstance1.close()
         for(let k of res){
           let data=k.data.entry_data.PostPage[0].graphql.shortcode_media.edge_media_to_parent_comment
           ||k.data.entry_data.PostPage[0].graphql.shortcode_media.edge_media_preview_comment,
@@ -300,62 +315,161 @@ methods:{
     firstTimeString=`${weekName[first.getDay()]} ${first.getDate()} ${monthName[first.getMonth()]} ${first.getFullYear()} - `,
     lastTimeString=`${weekName[last.getDay()]} ${last.getDate()} ${monthName[last.getMonth()]} ${last.getFullYear()}`
     this.commonTitle=firstTimeString+lastTimeString
-  
-    this.loadingInstance1.close()
+    this.showLoading=false
     this.showChart=true
     
   }
 },
 computed:{
- 
+  styleWhenShowOverview(){
+    if(this.showOverview){
+      return '  padding-left: 13.49%;padding-right: 22.92%;'
+    }else{
+      return '  padding-left: 13.49%;padding-right: 13.49%;'
+    }
+  }
 }
 }
 </script>
-<style lang='scss'>
+<style>
 .profilePage{
-  width: 57.8125%;
+  width: 100%;
   height: 100%;
+  position: relative;
+}
+.wrap{
+  width: 100%;
+  box-sizing: border-box;
+
   margin: 0 auto;
-  .overview{
-     width: 100%;
-  }
-  .tab{
-    display: flex;
-    button{
-       padding:20px;
-       border:1px solid salmon;
-      background: transparent;
-      outline: none;
-    }
-  }
-  .info{
-    width: 100%;
-    display:flex;
-    justify-content: space-between;
-    div{
-      width: 32%;
-      height: 235px;
-      border:1px solid salmon;
-    }
-  }
+}
+.userInfo{
+  background: #fff;
+  border-bottom: 2px solid #E2EAF5;
+  margin-top: 45px;
+}
+.info{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding-left: 42px;
+  padding-top: 34px;
+}
+.info img{
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  margin-right: 16px;
+}
+.info p:first-of-type{
+  font-size:22px;
+  font-family:PingFangSC-Regular;
+  font-weight:400;
+  color:#050505;
+  line-height:30px;
+}
+.info p:last-of-type{
+  font-size:11px;
+  font-family:PingFangSC-Regular;
+  font-weight:400;
+  color:#676767;
+  line-height:16px;
+}
+.userInfo .tab{
+  margin-top: 62px;
+  display: flex;
+  padding-left: 16px;
+}
+.userInfo .tab button{
+  display: flex;
+  width: 102px;
+  height: 43px;
+  font-size:20px;
+  font-family:ArialRoundedMTBold;
+  color:#3D4FD5;
+  line-height:23px;
+  background: #fff;
+  margin-right: 63px;
+  justify-content:center;
+  align-items: center;
+  position: relative;
+}
+.userInfo .tab .selected::after{
+  content: '';
+  width: 102px;
+  height: 4px;
+  background: #3D4FD5;
+  position: absolute;
+  left:0;
+  bottom: -2px;
+}
+.audience{
+  width: 100%;
+  padding-top: 30px;
+  padding-bottom: 190px;
+}
+.audience h4{
+  text-indent: 19px;
+  font-size:24px;
+  font-family:PingFangSC-Medium;
+  font-weight:500;
+  color:#050505;
+  line-height:33px;
+  text-align: left;
+}
+.audience .nums{
+  margin-top: 32px;
+  display: flex;
+  justify-content: space-between;
+}
+.audience .num{
+  width:31.56%;
+  background:#fff;
+  border-radius:10px;
+  border:1px solid #E9EAEC;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 48px;
+  padding-bottom: 60px;
+}
+.audience .num img{
+  width: 48px;
+  height: 48px;
+  margin-bottom: 24px;
+}
+.audience .num p{
+font-size:48px;
+font-family:'Gill Sans Bold';
+font-weight:bold;
+color:rgba(5,5,5,1);
+line-height:55px;
+}
+.audience .num  span{
+  font-size:16px;
+  font-family:PingFangSC-Semibold;
+  font-weight:600;
+  color:#676767;
+  line-height:22px;
 }
 .charts{
   width: 100%;
-  .card{
-    width: 100%;
-    height: 600px;
-    padding: 10px;
-    box-sizing: border-box;
-    border: 1px solid rgba(0,0,0,0.125);
-    background-color: #fff;
-  }
-  .half{
-    float: left;
-    width: 50%;
-  }
-
 }
-
+.charts .card{
+  width: 100%;
+  height: 600px;
+  padding: 10px;
+  box-sizing: border-box;
+  border: 1px solid #E9EAEC;
+  background-color: #fff;
+  margin-bottom: 30px;
+  border-radius:10px;
+}
+.charts   .half{
+  float: left;
+  width: 50%;
+}
 .clearfix::after{
     content: '';
     width: 0;
@@ -365,4 +479,5 @@ computed:{
     visibility: hidden;
     opacity: 0;
   }
+
 </style>

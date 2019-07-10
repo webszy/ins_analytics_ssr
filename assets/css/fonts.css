@@ -1,0 +1,7 @@
+@font-face {
+font-family: 'Gill Sans Bold';
+font-style: normal;
+font-weight: normal;
+font-display:swap ;
+src: local('Gill Sans Bold'), url('../fonts/Gill_Sans_Bold.woff') format('woff');
+}

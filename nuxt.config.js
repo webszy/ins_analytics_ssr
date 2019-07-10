@@ -28,8 +28,11 @@ module.exports = {
   ** Global CSS
   */
   css: [
+    './assets/css/reset.css',
+    './assets/css/fonts.css',
     'element-ui/lib/theme-chalk/index.css',
     './assets/css/swiper.min.css',
+    './assets/css/animate.min.css'
   ],
 
   /*
