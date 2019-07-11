@@ -138,7 +138,7 @@ methods:{
           let obj={name:k,value:tags[k]}
           arr.push(obj)
         }
-        console.log("tagcloud",arr)
+        // console.log("tagcloud",arr)
         resolve(arr)
     })
   },

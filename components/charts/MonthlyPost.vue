@@ -13,7 +13,7 @@ data(){
   return {
     myChart:null,
     option:{
-      backgroundColor: "#111c4e",
+      backgroundColor: "#fff",
       color: ['#3398DB'],
       tooltip: {
           trigger: 'axis',
@@ -27,21 +27,27 @@ data(){
               return "PostCount: " + prams[0].value
           }
       },
-      title:{
-        text:'',
-        right: "4%",
-        bottom: "2%",
+      title: {
+        text: "Post Count",
+        subtext:'',
+        left: "4%",
+        top: "1%",
         textStyle: {
-            color: "#fff",
-            fontSize: 13,
-            fontWeight:100,
+            color: "#050505",
+            fontSize: 24,
+            fontWeight:600,
+            fontFamily:'PingFangSC-Medium'
+        },
+        subtextStyle:{
+            color:'#7F7F7F',
+            fontSize: 16,
         }
-      },
+        },
       grid: {
-          left: '5%',
+          left: '4%',
           right: '5%',
           bottom: '5%',
-          top: '7%',
+          top: '15%',
           height: '85%',
           containLabel: true,
           z: 22
@@ -59,36 +65,50 @@ data(){
               }
           },
           axisLabel: {
-              show: true,
-              color: 'rgb(170,170,170)',
-              fontSize: 16
+            show: true,
+            formatter: '{value}',
+            color: '#E4E8EB',
+            textStyle:{
+                color:'#6A6262'
+            }
           }
       },
       yAxis: [{
               type: 'value',
               gridIndex: 0,
               splitLine: {
-                  show: false
+                  show: true,
+                  lineStyle: {
+                        color: '#E4E8EB'
+                    }
               },
               axisTick: {
                   show: false
               },
               axisLine: {
                   lineStyle: {
-                      color: '#0c3b71'
+                      color: '#E4E8EB',
+                      width: 2
                   }
               },
               axisLabel: {
-                  color: 'rgb(170,170,170)',
-                  formatter: '{value}'
-              }
+                  color: '#E4E8EB',
+                  formatter: '{value}',
+                    color: '#E4E8EB',
+                    textStyle:{
+                        color:'#6A6262'
+                    }
+              },
           },
           {
               type: 'value',
               gridIndex: 0,
               splitNumber: 12,
               splitLine: {
-                  show: false
+                  show: false,
+                  lineStyle: {
+                        color: '#E4E8EB'
+                    }
               },
               axisLine: {
                   show: false
@@ -128,15 +148,12 @@ data(){
                       color: new this.$echarts.graphic.LinearGradient(
                           0, 0, 0, 1, [{
                                   offset: 0,
-                                  color: '#00feff'
+                                  color: '#6B82EA'
                               },
-                              {
-                                  offset: 0.5,
-                                  color: '#027eff'
-                              },
+                              
                               {
                                   offset: 1,
-                                  color: '#0286ff'
+                                  color: '#3E50D5'
                               }
                           ]
                       )
@@ -161,7 +178,7 @@ data(){
               data: [],
               itemStyle: {
                   normal: {
-                      color: 'rgba(255,255,255,0.1)'
+                      color: 'rgba(255,255,255,0)'
                   }
               },
               zlevel: 9
@@ -196,7 +213,7 @@ mounted(){
       for(let k of yData){
           this.option.series[1].data.push(yData[yData.length-1])
       }
-      this.option.title.text=this.commonTitle
+      this.option.title.subtext=this.commonTitle
       this._initChart()
   })
   .catch(err=>{

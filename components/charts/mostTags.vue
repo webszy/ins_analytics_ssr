@@ -33,7 +33,7 @@ data(){
 ]
   return {
     myChart:null,option : {
-    backgroundColor: '#0E2A43',
+    backgroundColor: '#fff',
      tooltip: {
           show: true,
           formatter: "{b}:{c}"
@@ -41,23 +41,24 @@ data(){
       title:{
         text:'Hashtags most used',
         left: "center",
-        top: "4%",
+        top: "1%",
         textStyle: {
-            color: "#fff",
-            fontSize: 22,
+            color: "#050505",
+            fontSize: 24,
             fontWeight:600,
+            fontFamily:'PingFangSC-Medium'
         },
         subtext:this.commonTitle,
         subtextStyle :{
-          color: "#fff",
-            fontSize: 12,
+          color: "#7F7F7F",
+            fontSize: 16,
             fontWeight:100,
         }
       },
       grid: {
           left: '5%',
           top: '10%',
-          right: '5%',
+          right: '8%',
           bottom: '8%',
           containLabel: true
         },
@@ -77,26 +78,39 @@ data(){
         splitLine: {
             show: false
         },
+        axisLabel: {
+            show: true,
+            color: '#E4E8EB',
+            textStyle:{
+                color:'#6A6262'
+            }
+        }
     },
     yAxis: {
-            type: 'category',
-            axisTick: {
-                show: false,
-                alignWithLabel: false,
-                length: 5,
-
-            },
-            "splitLine": { //网格线
-                "show": false
-            },
-            inverse: 'true', //排序
-            axisLine: {
-                show: false,
-                lineStyle: {
-                    color: '#fff',
-                }
-            },
-            data: []
+        type: 'category',
+        axisTick: {
+            show: false,
+            alignWithLabel: false,
+            length: 5
+        },
+        "splitLine": { //网格线
+            "show": false
+        },
+        inverse: 'true', //排序
+        axisLine: {
+            show: false,
+            lineStyle: {
+                color: '#fff',
+            }
+        },
+        data: [],
+        axisLabel: {
+          show: true,
+          color: '#E4E8EB',
+          textStyle:{
+              color:'#6A6262'
+            }
+          }
         }
     ,
     series: [{
@@ -108,7 +122,7 @@ data(){
                   position: 'right',
                   formatter: '{c}',
                   textStyle: {
-                    color: 'white' //color of value
+                    color: '#6A6262' //color of value
                   }
                 }
               },

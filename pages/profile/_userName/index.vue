@@ -62,7 +62,7 @@
                 v-if=showChart />
             </div>
             <div class="clearfix">
-                <div class="card half">
+                <div class="card half" style="margin-right:2%;">
                   <div class="card-head"></div>
                     <most-tags
                     ref='chart'
@@ -161,7 +161,6 @@
 
 <script>
 import loading from '@/components/loading'
-import {Loading} from 'element-ui'
 import {
   getUserBaseInfo,
   getQueryHash,
@@ -256,7 +255,7 @@ methods:{
     let userId=this.profile.entry_data.ProfilePage[0].graphql.user.id
     getNextPageData(userId,this.end_cursor,this.queryIdList[2])
     .then(res=>{
-      console.log("TCL: getUserAllPost -> res", res)
+      // console.log("TCL: getUserAllPost -> res", res)
       if(res.status=='ok'){
         let item=res.data.user.edge_owner_to_timeline_media
         this.hasNextPage=item.page_info.has_next_page
@@ -307,7 +306,7 @@ methods:{
         }
       })
       .finally(()=>{
-        console.log('promise all down')
+        // console.log('promise all down')
         this.requestEnd()
       })
     }else{
@@ -498,9 +497,9 @@ line-height:55px;
   margin-bottom: 30px;
   border-radius:10px;
 }
-.charts   .half{
+.charts  .half{
   float: left;
-  width: 50%;
+  width: 48%;
 }
 .clearfix::after{
     content: '';

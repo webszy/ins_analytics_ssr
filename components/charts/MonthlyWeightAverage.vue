@@ -12,17 +12,22 @@ name:'MonthlyWeightChart',
 data(){
 return {
   myChart:null,
- 
   option :{
     backgroundColor: '#fff',
     title: {
-        text: "",
-        right: "4%",
-        bottom: "2%",
+        text: "Average Engagement ( Likes + Comments )",
+        subtext:'',
+        left: "4%",
+        top: "1%",
         textStyle: {
-            color: "#fff",
-            fontSize: 13,
-            fontWeight:100,
+            color: "#050505",
+            fontSize: 24,
+            fontWeight:600,
+            fontFamily:'PingFangSC-Medium'
+        },
+        subtextStyle:{
+            color:'#7F7F7F',
+            fontSize: 16,
         }
     },
     // 鼠标选中时弹框
@@ -35,13 +40,15 @@ return {
         formatter: "{a} on {b}: {c}"
     },
     legend: {
+        left:'center',
+        bottom:'0',
         data:['Likes','Comments']
     },
     grid: {
-        top: '10%',
+        top: '15%',
         left: '5%',
         right: '5%',
-        bottom: '10%',
+        bottom: '6%',
         containLabel: true,
     },
     xAxis: {
@@ -50,11 +57,14 @@ return {
         data: [],
         axisLabel: {
             margin: 30,
-            color: '#666'
+            color: '#E4E8EB',
+            textStyle:{
+                color:'#6A6262'
+            }
         },
         axisLine: {
             lineStyle: {
-                color: '#666',
+                color: '#E4E8EB',
                 width: 2
             }
         },
@@ -62,7 +72,7 @@ return {
             show: true,
             length: 25,
             lineStyle: {
-                color: "#666"
+                color: "#E4E8EB"
             }
         }
     },
@@ -71,24 +81,27 @@ return {
         position: 'left',
         axisLabel: {
             margin: 20,
-            color: '#666'
+            color: '#E4E8EB',
+            textStyle:{
+                color:'#6A6262'
+            }
         },
         axisTick: {
             show: true,
             length: 15,
             lineStyle: {
-                color: "#666",
+                color: "#E4E8EB",
             }
         },
         splitLine: {
             show: true,
             lineStyle: {
-                color: '#666'
+                color: '#E4E8EB'
             }
         },
         axisLine: {
             lineStyle: {
-                color: '#666',
+                color: '#E4E8EB',
                 width: 2
             }
         }
@@ -102,19 +115,19 @@ return {
         symbolSize: 6,
         lineStyle: {
             normal: {
-                color: "#666", // 线条颜色
+                color: "#4D5CD9", // 线条颜色
             },
         },
         label: {
             show: true,
             position: 'top',
             textStyle: {
-                color: '#666',
+                color: '#6A6262',
             }
         },
         itemStyle: {
-            color: "red",
-            borderColor: "#666",
+            color: "#EBEEFF",
+            borderColor: "#3D4FD5",
             borderWidth: 3
         },
         tooltip: {
@@ -128,15 +141,7 @@ return {
         },
         areaStyle: {
             normal: {
-                color: new this.$echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-                        offset: 0,
-                        color: '#eb64fb'
-                    },
-                    {
-                        offset: 1,
-                        color: '#3fbbff0d'
-                    }
-                ], false),
+                color: '#D9DDFF'
             }
         },
         data: []
@@ -150,19 +155,19 @@ return {
         symbolSize: 6,
         lineStyle: {
             normal: {
-                color: "#666", // 线条颜色
+                color: "#4D5CD9", // 线条颜色
             },
         },
         label: {
             show: true,
             position: 'top',
             textStyle: {
-                color: '#666',
+                color: '#6A6262',
             }
         },
         itemStyle: {
-            color: "red",
-            borderColor: "#666",
+            color: "#3D4FD5",
+            borderColor: "#3D4FD5",
             borderWidth: 3
         },
         tooltip: {
@@ -176,15 +181,7 @@ return {
         },
         areaStyle: {
             normal: {
-                color: new this.$echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-                        offset: 0,
-                        color: '#eb64fb'
-                    },
-                    {
-                        offset: 1,
-                        color: '#3fbbff0d'
-                    }
-                ], false),
+                color:'#D9DDFF'
             }
         },
         data: []
@@ -216,7 +213,7 @@ mounted(){
       this.option.xAxis.data=xData
       this.option.series[0].data=likeArr
       this.option.series[1].data=commentArr
-      this.option.title.text=this.commonTitle
+      this.option.title.subtext=this.commonTitle
       this._initChart()
   })
   .catch(err=>{

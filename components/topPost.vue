@@ -28,17 +28,16 @@
                  </div>
                 
                  <div class="bottom">
-                   <p>by @{{k.userName}}</p>
+                   <p>by {{k.userName}}</p>
                    <span>{{k.date}}</span>
                    <a :href="k.url" target="_blank">Show more</a>
                  </div>
                </div>  
             </div>
              <!-- Add Arrows -->
-            <div class="swiper-button-next"></div>
-            <div class="swiper-button-prev"></div>
        </div>
-       
+        <button ref="next" class="button-next"></button>
+        <button ref="prev" class="button-prev"></button>
      </div>
   </div>
 </template>
@@ -52,14 +51,10 @@ export default {
 name:'TopPost',
 components:{sImage},
 data(){
+  const vm=this
 return {
   userPost:[],
-  mySwiper:null,
   swiperOptions:{
-    navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
-      },
     effect:'slide',
     observer:true,
     observeParents:true,
@@ -73,7 +68,19 @@ return {
     on:{
       init:function(){
         this.slideTo(4,false)
+        let swiper=this
+        vm.$refs.next.onclick=function(){
+          let i=swiper.realIndex
+          i++
+          swiper.slideToLoop(i,500)
+        }
+        vm.$refs.prev.onclick=function(){
+           let i=swiper.realIndex
+           i--
+           swiper.slideToLoop(i,500)
+        }
       }
+
     }
   }
   }
@@ -190,18 +197,27 @@ font-weight:600;
 color:#8F8F8F;
 line-height:33px;
 }
-.post_swiper .swiper-button-next,
-.post_swiper .swiper-button-prev{
-   width: 90px;
+.post_swiper {
+  position: relative;
+}
+.post_swiper .button-next,
+.post_swiper .button-prev{
+  width: 90px;
   height: 90px;
+  display: block;
+  border-radius: 50%;
   background-size: cover;
   margin-top: -45px;
+  position: absolute;
+  top:50%;
+  z-index: 999;
 }
-.post_swiper .swiper-button-next{
- 
+.post_swiper .button-next{
+  right:-45px;
   background:url('../assets/images/next_ic.png') no-repeat left top;
 }
-.post_swiper .swiper-button-prev{
+.post_swiper .button-prev{
+  left:-45px;
   background:url('../assets/images/back_ic.png') no-repeat left top;
 }
 .swiper-slide{

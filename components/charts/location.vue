@@ -1,6 +1,11 @@
 <template>
-  <div class='chart'>
-    {{userLocation}}
+  <div class='chart location'>
+    <header>
+      <p>Location Tagged</p>
+      <span>Location Breakdown</span>
+    </header>
+    <p class="l">{{userLocation}}</p>
+    
   </div>
 </template>
 
@@ -67,12 +72,38 @@ computed:{
     }
     arr.sort((a,b)=>a.count-b.count)
   
-    return arr[0]?arr[0].location:'unknown'
+    return arr[0]?arr[0].location:''
   }
 }
 }
 </script>
 <style>
-
-
+.location header{
+  width: 100%;
+  padding-top: 1%;
+  text-align: center;
+}
+.location header p{
+  color:#050505;
+  font-size: 24px;
+  font-family:PingFangSC-Medium;
+  font-weight:600;
+  color:#050505;
+  line-height:33px;
+                               
+}
+.location header span{
+  font-size:16px;
+  font-family:PingFangSC-Medium;
+  font-weight:500;
+  color:#7F7F7F;
+  line-height:22px;
+}
+.location .l{
+  width: 100%;
+  font-size: 80px;
+  padding-top:30%;
+  text-align: center;
+  font-weight: 900;
+}
 </style>
