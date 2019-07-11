@@ -13,7 +13,7 @@ data(){
   return {
     myChart:null,
     option:{
-      backgroundColor: "#111c4e",
+      backgroundColor: "#fff",
       color: ['#3398DB'],
       tooltip: {
           trigger: 'axis',
@@ -33,8 +33,14 @@ data(){
         left: "4%",
         top: "2%",
         textStyle: {
-            color: "#fff",
-            fontSize: 20,
+            color: "#050505",
+            fontSize: 24,
+            fontWeight:600,
+            fontFamily:'PingFangSC-Medium'
+        },
+        subtextStyle :{
+          color: "#7F7F7F",
+            fontSize: 16,
             fontWeight:100,
         }
       },
@@ -57,13 +63,17 @@ data(){
           },
           axisLine: {
               lineStyle: {
-                  color: '#0c3b71'
+                color: '#E4E8EB',
+                width: 2
               }
           },
           axisLabel: {
               show: true,
-              color: 'rgb(170,170,170)',
-              fontSize: 16
+              color: '#E4E8EB',
+              fontSize: 16,
+              textStyle:{
+                color:'#6A6262'
+            }
           }
       },
       yAxis: [{
@@ -76,14 +86,24 @@ data(){
                   show: false
               },
               axisLine: {
-                //   lineStyle: {
-                //       color: '#0c3b71'
-                //   }
+                  lineStyle: {
+                      color: '#E4E8EB',
+                    width: 2
+                  }
               },
               axisLabel: {
-                  color: 'rgb(170,170,170)',
-                  formatter: '{value}'
-              }
+                  color: '#E4E8EB',
+                  formatter: '{value}',
+                  textStyle:{
+                    color:'#6A6262'
+                    }
+              },
+            splitLine: {
+            show: true,
+            lineStyle: {
+                color: '#E4E8EB'
+            }
+        },
           },
           {
               type: 'value',
@@ -130,15 +150,12 @@ data(){
                       color: new this.$echarts.graphic.LinearGradient(
                           0, 0, 0, 1, [{
                                   offset: 0,
-                                  color: '#00feff'
+                                  color: '#6B82EA'
                               },
-                              {
-                                  offset: 0.5,
-                                  color: '#027eff'
-                              },
+                              
                               {
                                   offset: 1,
-                                  color: '#0286ff'
+                                  color: '#3E50D5'
                               }
                           ]
                       )
