@@ -131,6 +131,18 @@
             title="Highest Engagement（likes+Comments)"
             sortType="weight"
             />
+            <top-post
+            :chartData=postList
+            :timeTitle=commonTitle
+            title="Highest Likes"
+            sortType="likes"
+            />
+            <top-post
+            :chartData=postList
+            :timeTitle=commonTitle
+            title="Highest Comment"
+            sortType="comment"
+            />
       </section>
     </section>
 
@@ -200,11 +212,12 @@ return {
    firstPostTime:0,
    lastPostTime:0,
    commonTitle:'',
-   showOverview:false,
+   showOverview:true,
    showLoading:false
   }
  },
 mounted(){
+  this.shareButton()
   if(this.userName!=''){
     this.showLoading=true
    this.getProfileData(this.userName)
@@ -315,10 +328,29 @@ methods:{
     firstTimeString=`${weekName[first.getDay()]} ${first.getDate()} ${monthName[first.getMonth()]} ${first.getFullYear()} - `,
     lastTimeString=`${weekName[last.getDay()]} ${last.getDate()} ${monthName[last.getMonth()]} ${last.getFullYear()}`
     this.commonTitle=firstTimeString+lastTimeString
-    this.showLoading=false
     this.showChart=true
+    this.$nextTick(()=>{
+       this.showLoading=false
+    })
     
-  }
+  },
+  shareButton(){
+      if(document.getElementById('shareButton')){return}
+      let script=document.createElement('script')
+      script.src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5d269635527c49da"
+      script.defer=''
+      script.id="shareButton"
+      let root=document.getElementById('__nuxt')
+      if(root){
+        root.appendChild(script)
+        script=null
+      }else{
+        setTimeout(()=>{
+          document.getElementById('__nuxt').appendChild(script)
+          script=null
+        },1000)
+      }
+    }
 },
 computed:{
   styleWhenShowOverview(){
@@ -406,7 +438,7 @@ computed:{
 .audience{
   width: 100%;
   padding-top: 30px;
-  padding-bottom: 190px;
+  padding-bottom: 95px;
 }
 .audience h4{
   text-indent: 19px;

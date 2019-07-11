@@ -5,6 +5,7 @@
 </template>
 <script>
 export default {
+  name:'layouts',
   mounted(){
     this.shareButton()
   },
@@ -21,8 +22,8 @@ export default {
         script=null
       }else{
         setTimeout(()=>{
-           root.appendChild(script)
-        script=null
+          document.getElementById('__nuxt').appendChild(script)
+          script=null
         },1000)
       }
     }

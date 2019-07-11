@@ -85,7 +85,7 @@ export default {
 }
 .banner div{
   padding-left: 262px;
-  padding-top: 441px;
+  padding-top: 520px;
   color:#000;
   width: 42.71%;
 }
@@ -228,6 +228,7 @@ export default {
   font-weight:400;
   color:#000;
   line-height:33px;
+  margin-bottom: 157px;
 }
 .features .ficon img{
   display: block;

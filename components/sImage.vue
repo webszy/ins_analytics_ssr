@@ -53,6 +53,20 @@ computed: {
 }
 </script>
 <style>
+.el-image .image-slot {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.el-image .image-slot .el-icon-loading{
+  font-size: 80px;
+  color:#3D4FD5;
+}
+.el-image .image-slot .el-icon-picture-outline{
+   font-size: 80px;
+}
 .img{
   position: relative;
 }
