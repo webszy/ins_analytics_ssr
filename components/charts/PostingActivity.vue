@@ -59,7 +59,7 @@ return {
             show: true
         }
      },
-     dataZoom: [{
+    /* dataZoom: [{
         type: 'inside',
         start: 0,
         end: 10
@@ -76,13 +76,14 @@ return {
             shadowOffsetY: 2
         },
       
-    }],
+    }],*/
     visualMap: [{
         show:true,
         min: 0,
         max: 10,
         range:[1,10],
         calculable: true,
+        itemHeight:440,
         // controller:true,
         orient: 'vertical',
         right: '2%',
