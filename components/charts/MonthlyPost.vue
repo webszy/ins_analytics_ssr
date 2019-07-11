@@ -61,7 +61,7 @@ data(){
           },
           axisLine: {
               lineStyle: {
-                  color: '#0c3b71'
+                  color: '#E4E8EB'
               }
           },
           axisLabel: {
@@ -72,6 +72,7 @@ data(){
                 color:'#6A6262'
             }
           }
+          
       },
       yAxis: [{
               type: 'value',

@@ -23,7 +23,27 @@ return {
         }
     },
     title:{
-      text:'PostLikeCommentByType'
+      text:'Likes and Comments by Media Type',
+       subtext:'',
+        left: "4%",
+        top: "1%",
+        textStyle: {
+            color: "#050505",
+            fontSize: 24,
+            fontWeight:600,
+            fontFamily:'PingFangSC-Medium'
+        },
+        subtextStyle:{
+            color:'#7F7F7F',
+            fontSize: 16,
+        }
+    },
+    grid: {
+        top: '15%',
+        left: '5%',
+        right: '5%',
+        bottom: '6%',
+        containLabel: true,
     },
     /*toolbox: {
         show: true,
@@ -47,14 +67,30 @@ return {
     calculable: false,
     xAxis: [{
         type: 'category',
-        data: weekName
+        data: weekName,
+         axisLabel: {
+            color: '#E4E8EB',
+            textStyle:{
+                color:'#6A6262'
+            }
+        },
+          axisLine: {
+            lineStyle: {
+                color: '#E4E8EB',
+                width: 2
+            }
+        }
     }],
     yAxis: [{
         type: 'value',
         axisLabel: {
             show: true,
             interval: 'auto',
-            formatter: '{value} '
+            formatter: '{value} ',
+            color: '#E4E8EB',
+            textStyle:{
+                color:'#6A6262'
+            }
         },
         splitLine: {
             show: true,
@@ -62,10 +98,16 @@ return {
               type: 'dashed'
             }
         },
-        show: true
+        show: true,
+          axisLine: {
+            lineStyle: {
+                color: '#E4E8EB',
+                width: 2
+            }
+        }
     }],
      legend: {
-        top: '6%',
+        bottom: '1%',
         data: ['Picture', 'Video'],
     },
     series: [
@@ -87,7 +129,7 @@ return {
                     name: '平均值'
                 }]
         },
-        color:'#388BFF'
+        color:'#4052D6'
       },
       {name: 'Video',
         type: 'bar',
@@ -107,7 +149,7 @@ return {
                     name: '平均值'
                 }]
         },
-        color:'#05C3FA'
+        color:'#3D83F6'
       }
     ]
 }
@@ -136,6 +178,7 @@ mounted(){
    this._initData().then(({typeImg,typeVideo})=>{
       this.option.series[0].data=typeImg
       this.option.series[1].data=typeVideo
+      this.option.title.subtext=this.commonTitle
       this._initChart()
   })
 },

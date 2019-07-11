@@ -13,22 +13,26 @@ name:'MostTagsChart',
 data(){
   const colorArray = [
     {
-        top: '#ffa800', //黄
-        bottom: 'rgba(11,42,84,.3)'
+        top: '#4D5CD9', //蓝
+        bottom: '#CCD3FA'
     }, {
-        top: '#1ace4a', //绿
-        bottom: 'rgba(11,42,84, 0.3)'
+        top: '#336CD6', 
+        bottom: '#D4DAFF'
     },
     {
-        top: '#4bf3ff', //蓝
-        bottom: 'rgba(11,42,84,.3)'
+        top: '#35ABDF', 
+        bottom: '#C4E2FE'
     }, {
-        top: '#4f9aff', //深蓝
-        bottom: 'rgba(11,42,84,.3)'
+        top: '#36D0E3', 
+        bottom: '#B9EAFD'
     },
     {
-        top: '#b250ff', //粉
-        bottom: 'rgba(11,42,84,.3)'
+        top: '#7235DF', 
+        bottom: '#F4DCFA'
+    },
+    {
+        top: '#3649EC', 
+        bottom: '#CCD3FA'
     }
 ]
   return {
@@ -40,7 +44,7 @@ data(){
         },
       title:{
         text:'Hashtags most used',
-        left: "center",
+        left: "4%",
         top: "1%",
         textStyle: {
             color: "#050505",

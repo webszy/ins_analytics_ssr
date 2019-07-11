@@ -62,7 +62,7 @@
                 v-if=showChart />
             </div>
             <div class="clearfix">
-                <div class="card half" style="margin-right:2%;">
+                <div class="card half"  :style="showLocation?'margin-right:2%;':'width:100%;'">
                   <div class="card-head"></div>
                     <most-tags
                     ref='chart'
@@ -72,14 +72,14 @@
                     :commonTitle=commonTitle
                     v-if=showChart />
                 </div>
-                <div class="card half">
+                <div class="card half" v-if="showLocation">
                   <div class="card-head"></div>
                     <location
                     :chartData=postList 
                     :firstTime=firstPostTime
                     :lastTime=lastPostTime
                     :commonTitle=commonTitle
-                    v-if=showChart />
+                     />
                 </div>
             </div>
             <div class="card">
@@ -212,7 +212,8 @@ return {
    lastPostTime:0,
    commonTitle:'',
    showOverview:true,
-   showLoading:false
+   showLoading:false,
+   showLocation:true
   }
  },
 mounted(){
@@ -275,6 +276,7 @@ methods:{
     for(let k of edges){
       this.postList.push(k.node)
     }
+
   },
   // 发现拉取首页时，没有评论的详细信息，需要通过shortcode获取一遍，query接口的时候是有详细信息的
   ckeckComment(){
@@ -327,6 +329,11 @@ methods:{
     firstTimeString=`${weekName[first.getDay()]} ${first.getDate()} ${monthName[first.getMonth()]} ${first.getFullYear()} - `,
     lastTimeString=`${weekName[last.getDay()]} ${last.getDate()} ${monthName[last.getMonth()]} ${last.getFullYear()}`
     this.commonTitle=firstTimeString+lastTimeString
+    /*如果不存在地址，就隐藏*/
+    let location=this.userLocation(this.postList)
+    if(location===''){
+      this.showLocation=false
+    }
     this.showChart=true
     this.$nextTick(()=>{
        this.showLoading=false
@@ -349,7 +356,37 @@ methods:{
           script=null
         },1000)
       }
+  },
+  userLocation(chartData){
+    // 遍历
+    let data={}
+    for(let k of chartData){
+     
+      if(k.location&&k.location!==null){
+      console.log("TCL: userLocation -> k.location", k.location)
+        if(k.location.name&&k.location.name.length){
+
+          if(!data[k.location.name]){
+            data[k.location.name]=1
+          }else{
+            data[k.location.name]++
+          }
+        }
+      }
     }
+    
+    let arr=[]
+    for(let k in data){
+      let obj={
+        location:k,
+        count:data[k]
+      }
+      arr.push(obj)
+    }
+    arr.sort((a,b)=>a.count-b.count)
+  
+    return arr[0]?arr[0].location:''
+  }
 },
 computed:{
   styleWhenShowOverview(){
