@@ -89,6 +89,11 @@ return {
         bottom: '8%',
         inRange:{
           color:['#F0F0F0','#3D4FD5','#26328F']
+        },
+        controller:{
+          // inRange:{
+          //   symbolSize:[30,500]
+          // }
         }
     }],
     series: [{
