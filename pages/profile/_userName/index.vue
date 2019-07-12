@@ -122,6 +122,7 @@
                 :commonTitle=commonTitle
                 v-if=showChart />
             </div>
+            <!-- <button class="toTop" @click="showOverview=false">View Top Posts</button> -->
           </section>
       </section>
       <section class="topPost" v-if="!showOverview">

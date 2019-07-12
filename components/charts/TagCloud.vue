@@ -14,7 +14,7 @@ data(){
     option : {
     title:{
         text:'Tag Cloud',
-        subtext:'',
+        subtext:this.commonTitle,
         left: "4%",
         top: "1%",
         textStyle: {
@@ -92,6 +92,10 @@ data(){
   },
   lastTime:{
     type:Number,
+    required:true
+  },
+  commonTitle:{
+    type:String,
     required:true
   }
 },

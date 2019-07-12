@@ -136,6 +136,19 @@ line-height:55px;
   float: left;
   width: 48%;
 }
+.toTop{
+  display: block;
+  margin: 0 auto;
+  padding: 10px;
+  border:1px solid #3D4FD5;
+  background-color: rgb(247,251,255);
+  border-radius: 6px;
+}
+.toTop:hover{
+  color:#fff;
+  background-color: #3D4FD5;
+  
+}
 .clearfix::after{
     content: '';
     width: 0;
