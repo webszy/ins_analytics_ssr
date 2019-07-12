@@ -108,7 +108,7 @@ return {
     }],
      legend: {
         bottom: '1%',
-        data: ['Picture', 'Video'],
+        data: ['Picture', 'Others'],
     },
     series: [
       {name: 'Picture',
@@ -131,7 +131,7 @@ return {
         },
         color:'#4052D6'
       },
-      {name: 'Video',
+      {name: 'Others',
         type: 'bar',
         data: [],
         markPoint: {

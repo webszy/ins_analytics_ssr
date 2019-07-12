@@ -1,5 +1,5 @@
 <template>
-   <a class="header">
+   <a class="header" href="/">
       <img src="../assets/images/logo_ic.png" alt="logo">
       <div>
         <p>{{info.name}}</p>

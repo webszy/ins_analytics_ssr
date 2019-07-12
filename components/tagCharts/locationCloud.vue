@@ -7,14 +7,14 @@
 <script>
 
 export default {
-name:'TagCloud',
+name:'LocationCloud',
 data(){
   return {
     myChart:null,
     option : {
     title:{
-        text:'Tag Cloud',
-        subtext:'',
+        text:'Location Cloud',
+        subtext:'First Page Post BreakDown',
         left: "4%",
         top: "1%",
         textStyle: {
@@ -35,13 +35,13 @@ data(){
         }
     },
     series: [{
-        name: 'HashTags',
+        name: 'Location',
         type: 'wordCloud',
         gridSize: 2,
         sizeRange: [20, 60],
         rotationRange: [-90, 90],
         // circle cardioid diamond  triangle-forward triangle pentagon square
-        shape: 'square',
+        shape: 'circle',
         left: '5%',
         top: '5%',
         width: '90%',
@@ -108,50 +108,27 @@ mounted(){
 methods:{
   _initData(){
     return new Promise((resolve,reject)=>{
-        let xData=[],tags={}
+        let xData=[],baseData={}
         // 遍历caption，由于caption字符串可能有多个例如'#a #b #c'，此时应分割字符串再做处理
         for(let k of this.chartData){
-          let captions=k.edge_media_to_caption
-          if(captions&&captions.edges&&captions.edges.length){
-            for(let n of captions.edges){
-              let strArr=n.node.text.split(' ')              
-              if(strArr.length>1){
-                for(let o of strArr){
-                  if(o.indexOf('#')===0){
-                    let tagStrArr=o.split('#')
-                   tagStrArr.forEach(tag=>{
-                       tag='#'+tag
-                       if(tag.length>0&&tag!=='#'){
-                           if(tags[tag]){
-                               tags[tag]++
-                           }else{
-                               tags[tag]=1
-                           }
-                       }
-                   })
-                    
-                  }
-                }
-              }else{
-                
-                if(n.node.text.indexOf('#')==0&&n.node.text!=='#'){
-                  if(tags[n.node.text]){
-                    tags[n.node.text]++
-                  }else{
-                    tags[n.node.text]=1
-                  }
-                }
-                
-              }
+          if(k.location&&k.location.length){
+            
+            if(baseData[k.location]){
+              baseData[k.location]++
+            }else{
+              baseData[k.location]=1
             }
           }
         }
         let arr=[]
-        for(let k in tags){
-          let obj={name:k,value:tags[k]}
+        for(let k in baseData){
+          let obj={name:k,value:baseData[k]}
           arr.push(obj)
         }
-        // console.log("tagcloud",arr)
+        console.log("tagcloud",arr)
+        if(arr.length===0){
+          arr.push({name:'Not Find',value:1})
+        }
         resolve(arr)
     })
   },

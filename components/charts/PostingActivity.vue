@@ -25,7 +25,7 @@ return {
     animation: false,
     title:{
       text:'Posting Activity',
-      subtext:'Posting times on Profile',
+      subtext:this.firstTime===0?this.commonTitle:'Posting times on Profile',
       left:'5%',
       textStyle: {
             color: "#050505",

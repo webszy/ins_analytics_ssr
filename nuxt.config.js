@@ -1,5 +1,5 @@
 const pkg = require('./package')
-
+const info=require('./assets/content/seo')
 
 module.exports = {
   mode: 'universal',
@@ -8,14 +8,20 @@ module.exports = {
   ** Headers of the page
   */
   head: {
-    title: pkg.name,
+    title: info.title,
     meta: [
       { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: pkg.description }
+      { name: 'viewport', content: 'width=device-width, initial-scale=1, user-scalable=no' },
+      { hid: 'description', name: 'description', content: info.description },
+      { hid: 'keywords', name: 'keywords', content: info.keywords },
+      { name:'og:site_name',property:'og:site_name',content:''},
+      { name:'og:title',property:'og:type',content:info.title},
+      { name:'og:url',property:'og:url',content:''},
+      { name:'og:description',property:'og:description',content:info.description},
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+       { rel: 'canonical', href: '' },
     ]
   },
 
@@ -32,7 +38,8 @@ module.exports = {
     './assets/css/fonts.css',
     'element-ui/lib/theme-chalk/index.css',
     './assets/css/swiper.min.css',
-    './assets/css/animate.min.css'
+    './assets/css/animate.min.css',
+    './assets/css/style.css'
   ],
 
   /*
@@ -74,5 +81,11 @@ module.exports = {
         grid: true
       }
     },
+    performance:{
+    gzip:true,
+    threshold:10240,
+    prefetch:true
+  },
+   cache: true
   }
 }

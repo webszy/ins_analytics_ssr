@@ -13,11 +13,11 @@
                     <s-image :src=k.src :width='420' :height='420' :index="i+1" />
                     <div class="nums">
                       <div class="num">
-                        <p>{{k.likeCount}}</p>
+                        <p>{{numStyle(k.likeCount)}}</p>
                         <span>Likes</span>
                       </div>
                         <div class="num">
-                        <p>{{k.commentCount}}</p>
+                        <p>{{numStyle(k.commentCount)}}</p>
                         <span>Comments</span>
                       </div>
                     </div>
@@ -96,7 +96,7 @@ props:{
   },
   timeTitle:{
     type:String,
-    required:true
+    default:''
   },
   title:{
      type:String,
@@ -141,8 +141,6 @@ methods:{
           date:`${week},${day} ${month} ${year}`,
           url:'https://www.instagram.com/p/'+k.shortcode+'/',
         }
-        post.likeCount=parseNum(post.likeCount)
-        post.commentCount=parseNum(post.commentCount)
         baseData.push(post)
       }
       resolve(baseData)
@@ -166,6 +164,9 @@ methods:{
       default:''
         break;
     }
+  },
+  numStyle(num){
+    return parseNum(num)
   }
  },
 computed:{}
@@ -283,11 +284,8 @@ line-height:33px;
   line-height:26px;
   word-break:normal;
   display:block; 
-  /* white-space:pre-wrap; */
   word-wrap : break-word ;
-  -webkit-box-orient: vertical; 
-  -webkit-line-clamp: 3;
-  overflow: hidden;
+  overflow-y: auto;
 }
 .swiper-slide  .bottom{
   width: 100%;

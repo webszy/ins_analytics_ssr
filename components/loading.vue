@@ -4,7 +4,7 @@
       <div ref="element" class="loadAni"></div>
       <h2>{{word}}</h2>
       <p>Our artificial intelligence is Processing your analytics for 
-        <span>{{'@'+$route.params.userName||''}}</span>
+        <span>{{name}}</span>
       </p>
     </div>
   </div>
@@ -20,6 +20,12 @@ data(){
 return {
   word:'Loading...'
   }
+ },
+ props:{
+   name:{
+     type:String,
+     required:true
+   }
  },
 mounted(){
   let anim=lottie.loadAnimation({

@@ -48,8 +48,8 @@ export default {
   components: {commonHead},
   data(){
     return {
-      username:'ddbo119',
-      hashtag:'water',
+      username:'',
+      hashtag:'china',
       featureIcons:featureIcons
     }
   },
@@ -58,14 +58,14 @@ export default {
       if(this.username!=''){
         this.$router.push({name:'profile-userName',params:{userName:this.username}})
       }else{
-        alert('请输入用户名')
+        this.$message.warning('Please enter a username ')
       }
     },
     toHashtag(){
       if(this.hashtag!=''){
         this.$router.push({name:'hashtag-hashtag',params:{hashtag:this.hashtag}})
       }else{
-        alert('请输入用户名')
+        this.$message.warning('Please enter a Tag ')
       }
     }
   }
@@ -84,14 +84,15 @@ export default {
     background-size: cover;
 }
 .banner div{
-  padding-left: 262px;
-  padding-top: 520px;
+  padding-left: 13.65%;
+  padding-top: 27.08%;
   color:#000;
   width: 42.71%;
+  font-size: 10px;
 }
 .banner h5{
-  font-size: 50px;
-  line-height: 70px;
+  font-size: 5em;
+  line-height: 1.4;
   font-family: 'PingFangSC-Medium';
   font-weight:500;
   margin-bottom: 11px;
@@ -100,8 +101,8 @@ export default {
   color:#1F2FA3;
 }
 .banner h3{
-  font-size:70px;
-  line-height: 81px;
+  font-size:7em;
+  line-height: 1.22;
   font-family: 'Gill Sans Bold';
   font-weight:600;
   margin-bottom: 32px;
@@ -109,8 +110,8 @@ export default {
 .banner p{
   color:#8F8F8F;
   width: 75.98%;
-  font-size: 28px;
-  line-height: 52px;
+  font-size: 2.8em;
+  line-height: 1.85;
   font-family:'PingFangSC-Regular';
   font-weight: 400;
 }
@@ -162,6 +163,7 @@ export default {
 .actions .item input{
   display: block;
   width: 81.26%;
+  min-width: 254px;
   height: 100%;
   font-size: 34px;
   box-sizing: border-box;
@@ -174,9 +176,11 @@ export default {
   opacity: 1;
   padding: 1px;
 }
+
 .actions .item button{ 
   width:14.82%;
   height: 100%;
+  min-width: 80px;
   display: block;
   background-image: url('../assets/images/search_ic.png');
   background-repeat: no-repeat;
@@ -210,7 +214,7 @@ export default {
 .features .icons{
   width: 100%;
   box-sizing: border-box;
-  padding: 106px 305px 0 311px;
+  padding: 106px 15.89% 0 16.2%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -230,8 +234,28 @@ export default {
   line-height:33px;
   margin-bottom: 157px;
 }
+@media screen and (min-width:1025px) and (max-width: 1360px){
+  
+  .banner div{
+    width: 61%;
+   font-size: 9px;
+  }
+  .features .icons{
+     justify-content: flex-start;
+  }
+  .features .ficon{
+    width: 33.33%;
+    
+  }
+  .actions .item input::placeholder{
+    font-size: 22px;
+  }
+}
 .features .ficon img{
   display: block;
   width: 60px;
+}
+.features .ficon p{
+   text-align: center;
 }
 </style>
