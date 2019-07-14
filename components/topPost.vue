@@ -236,7 +236,7 @@ line-height:33px;
    width:  93.12%;
    
  }
-.swiper-slide img{
+.swiper-slide .img{
  width: 100%;
  height: 420px;
 }

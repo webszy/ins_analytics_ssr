@@ -47,7 +47,7 @@ mounted(){
 },
 computed: {
   getStyle(){
-    return 'width:'+this.width+'px;'+'height:'+this.height+'px;'
+    return 'width:100%;'+'height:'+this.height+'px;'
   }
 },
 }
