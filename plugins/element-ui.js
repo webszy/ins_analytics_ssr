@@ -6,16 +6,13 @@
 //   Vue.use(Element, { locale })
 // }
 import Vue from 'vue'
-import {  
-    Loading,
-    Notification,
-    Message,
-    Image,
+import { 
+    Image
     
 } from 'element-ui' //引入组件
 Vue.prototype.$ELEMENT = { size: 'small' };
-Vue.use(Loading);
+// Vue.use(Loading);
 Vue.use(Image);
-Vue.prototype.$message = Message;
-Vue.prototype.$notify = Notification;
-Vue.prototype.$loading = Loading;
+// Vue.prototype.$message = Message;
+// Vue.prototype.$notify = Notification;
+// Vue.prototype.$loading = Loading;

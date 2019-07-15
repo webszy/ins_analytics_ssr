@@ -51,7 +51,8 @@ export default {
     return {
       username:'',
       hashtag:'',
-      featureIcons:featureIcons
+      featureIcons:featureIcons,
+      info:info
     }
   },
   methods: {
@@ -82,14 +83,17 @@ export default {
     width: 100%;
     height: 988px;
     background: url('../assets/images/bg.jpg') no-repeat left top;
-    background-size: cover;
+    /* background-size: cover; */
+    background-size: contain;
 }
 .banner div{
   padding-left: 13.65%;
   padding-top: 27.08%;
   color:#000;
-  width: 42.71%;
+  /* width: 42.71%; */
+   width: 53.71%;
   font-size: 10px;
+  box-sizing: border-box;
 }
 .banner h5{
   font-size: 5em;
@@ -238,8 +242,9 @@ export default {
 @media screen and (min-width:1025px) and (max-width: 1360px){
   
   .banner div{
-    width: 61%;
-   font-size: 9px;
+    width: 61.71%;
+   font-size: 8px;
+   padding-top: 30%;
   }
   .features .icons{
      justify-content: flex-start;
@@ -251,6 +256,12 @@ export default {
   .actions .item input::placeholder{
     font-size: 22px;
   }
+  .actions span{
+    margin-right: 22px;
+  }
+  .actions .item{
+    width:38.41% 
+  }
 }
 .features .ficon img{
   display: block;
@@ -259,4 +270,6 @@ export default {
 .features .ficon p{
    text-align: center;
 }
+
+
 </style>

@@ -146,7 +146,6 @@
             />
       </section>
     </section>
-   <el-backtop target=".profilePage"></el-backtop>
     <!-- loading -->
      <transition     
       enter-active-class="animated faster fadeIn"
@@ -214,7 +213,10 @@ return {
    commonTitle:'',
    showOverview:true,
    showLoading:false,
-   showLocation:true
+   showLocation:true,
+   backTop:{
+     bottom:200
+   }
   }
  },
 mounted(){
