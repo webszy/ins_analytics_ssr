@@ -107,6 +107,7 @@ mounted(){
   this._initData().then(baseData=>{
     let fun=this.sortBy(this.sortType)
     baseData.sort(fun)
+    
     this.userPost=baseData.splice(0,9)
   })
 },

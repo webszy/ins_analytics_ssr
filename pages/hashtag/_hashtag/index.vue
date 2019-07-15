@@ -70,7 +70,7 @@
             <top-post
             :chartData=tagMediaTopList
             title="Highest Likes"
-            sortType="likes"
+            sortType="like"
             />
             <top-post
             :chartData=tagMediaTopList

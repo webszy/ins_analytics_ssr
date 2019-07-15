@@ -136,7 +136,7 @@
             :chartData=postList
             :timeTitle=commonTitle
             title="Highest Likes"
-            sortType="likes"
+            sortType="like"
             />
             <top-post
             :chartData=postList
@@ -146,7 +146,7 @@
             />
       </section>
     </section>
-
+   <el-backtop target=".profilePage"></el-backtop>
     <!-- loading -->
      <transition     
       enter-active-class="animated faster fadeIn"
