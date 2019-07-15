@@ -181,6 +181,7 @@ export default {
   font-size: 30px;
   opacity: 1;
   padding: 1px;
+  line-height: 200%;
 }
 
 .actions .item button{ 
