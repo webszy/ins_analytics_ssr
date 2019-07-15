@@ -3,7 +3,7 @@
     <common-head></common-head>
     <section class="banner">
       <div>
-        <h5>WelCome to <span>XXX</span> </h5>
+        <h5>WelCome to <span>{{info.name}}</span> </h5>
         <h3>Instagram AI Analytics</h3>
         <p>Enter any @Profile or #Hashtag to ananlyze real-time <span>Engagement Analysis</span></p>
       </div>
@@ -43,13 +43,14 @@
 <script>
 import featureIcons from '../assets/content/featuresIcons'
 import commonHead from '../components/commonHead'
+import info from '../assets/content/seo'
 export default {
   name:'HomePage',
   components: {commonHead},
   data(){
     return {
       username:'',
-      hashtag:'china',
+      hashtag:'',
       featureIcons:featureIcons
     }
   },
