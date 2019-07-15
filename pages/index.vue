@@ -130,7 +130,7 @@ export default {
   align-items: center;
   padding: 0 13.65%;
   box-sizing: border-box;
-  margin-top: -120px;
+  /* margin-top: -120px; */
 }
 .actions span{
   display: block;
@@ -244,7 +244,9 @@ export default {
   margin-bottom: 157px;
 }
 @media screen and (min-width:1025px) and (max-width: 1360px){
-  
+  .banner{
+    /* height: 620px; */
+  }
   .banner div{
     width: 61.71%;
    font-size: 8px;
@@ -258,7 +260,7 @@ export default {
     
   }
   .actions .item input::placeholder{
-    font-size: 20px;
+    font-size: 21px;
   }
   .actions span{
     margin-right: 19px;

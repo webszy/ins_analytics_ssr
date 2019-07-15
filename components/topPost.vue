@@ -64,14 +64,15 @@ return {
     spaceBetween: 20,
     centeredSlides: true,
     centerInsufficientSlides: true,
-    loop:true,
+    loop:false,
     on:{
       init:function(){
-        this.slideTo(4,false)
+        this.slideTo(1,false)
         let swiper=this
         vm.$refs.next.onclick=function(){
           let i=swiper.realIndex
           i++
+         
           swiper.slideToLoop(i,500)
         }
         vm.$refs.prev.onclick=function(){
@@ -83,7 +84,7 @@ return {
 
     }
   },
-  imgHeight:0
+  imgHeight:'0'
   }
  },
 props:{
@@ -110,7 +111,8 @@ mounted(){
     baseData.sort(fun)
     this.userPost=baseData.splice(0,9)
     this.$nextTick(()=>{
-      this.imgHeight=document.querySelector('.swiper-slide').style.width
+      let w=document.querySelector('.swiper-slide-active').clientWidth*0.9334
+      this.imgHeight=w+'px'
     })
     
   })
@@ -280,7 +282,7 @@ line-height:33px;
 }
 .swiper-slide .content span{
   width: 100%;
-  height: 104px;
+  height: 234px;
   color:#3D4FD5;
   font-size:16px;
   font-family:PingFangSC-Semibold;
