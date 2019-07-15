@@ -29,12 +29,8 @@ props:{
     type:String,
     required:true
   },
-  width:{
-    type:Number,
-    required:true
-  },
   height:{
-    type:Number,
+    type:String,
     required:true
   },
   index:{
@@ -47,7 +43,7 @@ mounted(){
 },
 computed: {
   getStyle(){
-    return 'width:100%;'+'height:'+this.height+'px;'
+    return 'width:100%;'+'height:'+this.height
   }
 },
 }

@@ -235,6 +235,10 @@ methods:{
             
             likeCount=k.edge_media_preview_like.count||0,
             commentCount=k.edge_media_to_comment.count||0
+            if(monthStr==="Jan'18"){
+                console.log(likeCount)
+            }
+            
             if(!likeData[monthStr]){
                 likeData[monthStr]=0
                 len++

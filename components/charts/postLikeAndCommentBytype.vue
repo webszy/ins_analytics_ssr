@@ -129,7 +129,7 @@ return {
                     name: '平均值'
                 }]
         },
-        color:'#4052D6'
+        color:'#8F5AE5'
       },
       {name: 'Others',
         type: 'bar',

@@ -23,12 +23,12 @@ export default {
 </script>
 <style>
  .header{
-    width: 100%;
+    width: fit-content;
     height:80px;
     display: flex;
     align-items: flex-end;
     box-sizing: border-box;
-    padding-left: 273px;
+    padding-left: 13.65%;
 }
 .header img{
   width: 40px;

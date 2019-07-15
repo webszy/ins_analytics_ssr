@@ -10,7 +10,7 @@
             <div class="swiper-wrapper">
                <div class="swiper-slide" v-for="(k,i) in userPost" :key=i>
                  <div class="top">
-                    <s-image :src=k.src :width='420' :height='420' :index="i+1" />
+                    <s-image :src=k.src :height=imgHeight :index="i+1" />
                     <div class="nums">
                       <div class="num">
                         <p>{{numStyle(k.likeCount)}}</p>
@@ -82,7 +82,8 @@ return {
       }
 
     }
-  }
+  },
+  imgHeight:0
   }
  },
 props:{
@@ -107,8 +108,11 @@ mounted(){
   this._initData().then(baseData=>{
     let fun=this.sortBy(this.sortType)
     baseData.sort(fun)
-    
     this.userPost=baseData.splice(0,9)
+    this.$nextTick(()=>{
+      this.imgHeight=document.querySelector('.swiper-slide').style.width
+    })
+    
   })
 },
 methods:{
@@ -239,7 +243,6 @@ line-height:33px;
  }
 .swiper-slide .img{
  width: 100%;
- height: 420px;
 }
 .swiper-slide .nums{
   width: 100%;
@@ -321,5 +324,11 @@ margin-bottom: 6px;
   font-weight:600;
   color:#8F8F8F;
   line-height:22px;
+}
+@media screen and (min-width:1025px) and (max-width: 1360px){
+  .post h5{
+    font-size: 20px;
+  }
+
 }
 </style>

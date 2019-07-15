@@ -394,7 +394,7 @@ methods:{
 computed:{
   styleWhenShowOverview(){
     if(this.showOverview){
-      return '  padding-left: 13.49%;padding-right: 22.92%;'
+      return '  padding-left: 13.49%;padding-right: 13.49%;'
     }else{
       return '  padding-left: 13.49%;padding-right: 13.49%;'
     }

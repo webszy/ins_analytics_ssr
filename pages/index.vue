@@ -126,9 +126,11 @@ export default {
 .actions{
   width: 100%;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  padding-top: 47px;
+  padding: 0 13.65%;
+  box-sizing: border-box;
+  margin-top: -120px;
 }
 .actions span{
   display: block;
@@ -138,8 +140,9 @@ export default {
   margin-right: 35px;
 }
 .actions .item {
-  width: 36.41%;
+  /* width: 36.41%; */
   position: relative;
+  padding-right: 15px;
 }
 .actions .item p{
   font-size:30px;
@@ -150,7 +153,8 @@ export default {
   margin-bottom: 30px;
 }
 .actions .item div{
-  width: 96.24%;
+  /* width: 96.24%; */
+  width: 100%;
   height: 98px;
   box-shadow:0px 2px 27px 0px rgba(123,123,123,0.11);
   border-radius:8px;
@@ -185,7 +189,7 @@ export default {
 .actions .item button{ 
   width:14.82%;
   height: 100%;
-  min-width: 80px;
+  min-width: 96px;
   display: block;
   background-image: url('../assets/images/search_ic.png');
   background-repeat: no-repeat;
@@ -254,13 +258,19 @@ export default {
     
   }
   .actions .item input::placeholder{
-    font-size: 22px;
+    font-size: 20px;
   }
   .actions span{
-    margin-right: 22px;
+    margin-right: 19px;
   }
   .actions .item{
-    width:38.41% 
+    /* width:38.41%  */
+  }
+  .actions .item div{
+    height: 80px;
+  }
+  .actions .item button{
+    min-width: 80px;
   }
 }
 .features .ficon img{
