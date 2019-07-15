@@ -4,7 +4,7 @@
     <section class="banner">
       <div>
         <h5>WelCome to <span>{{info.name}}</span> </h5>
-        <h3>Instagram AI Analytics</h3>
+        <h3>{{info.subName}}</h3>
         <p>Enter any @Profile or #Hashtag to ananlyze real-time <span>Engagement Analysis</span></p>
       </div>
     </section>
@@ -81,17 +81,18 @@ export default {
 }
 .banner{
     width: 100%;
-    height: 988px;
-    background: url('../assets/images/bg.jpg') no-repeat left top;
+    /* height: 988px; */
+    height: 640px;
+    background: url('../assets/images/bg2.jpg') no-repeat ;
     /* background-size: cover; */
-    background-size: contain;
+    background-position:90% 30px; 
+    background-size: 40%;
 }
 .banner div{
-  padding-left: 13.65%;
-  padding-top: 27.08%;
+  padding-left: 13.48%;
+  /* padding-top: 27.08%; */
+  padding-top: 15%;
   color:#000;
-  /* width: 42.71%; */
-   width: 53.71%;
   font-size: 10px;
   box-sizing: border-box;
 }
@@ -114,7 +115,7 @@ export default {
 }
 .banner p{
   color:#8F8F8F;
-  width: 75.98%;
+  width: 53.71%;
   font-size: 2.8em;
   line-height: 1.85;
   font-family:'PingFangSC-Regular';
@@ -128,21 +129,18 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 13.65%;
+  padding: 0 13.48%;
   box-sizing: border-box;
-  /* margin-top: -120px; */
 }
 .actions span{
   display: block;
   width: 1px;
   height: 164px;
   background: #E5E5E5;
-  margin-right: 35px;
 }
 .actions .item {
-  /* width: 36.41%; */
+  width: 47.41%;
   position: relative;
-  padding-right: 15px;
 }
 .actions .item p{
   font-size:30px;
@@ -153,7 +151,6 @@ export default {
   margin-bottom: 30px;
 }
 .actions .item div{
-  /* width: 96.24%; */
   width: 100%;
   height: 98px;
   box-shadow:0px 2px 27px 0px rgba(123,123,123,0.11);
@@ -247,10 +244,12 @@ export default {
   .banner{
     /* height: 620px; */
   }
+  .banner h3{
+    font-size: 6em;
+  }
   .banner div{
-    width: 61.71%;
-   font-size: 8px;
-   padding-top: 30%;
+   font-size: 9px;
+   /* padding-top: 30%; */
   }
   .features .icons{
      justify-content: flex-start;
@@ -262,12 +261,7 @@ export default {
   .actions .item input::placeholder{
     font-size: 21px;
   }
-  .actions span{
-    margin-right: 19px;
-  }
-  .actions .item{
-    /* width:38.41%  */
-  }
+
   .actions .item div{
     height: 80px;
   }

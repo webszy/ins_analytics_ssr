@@ -28,7 +28,7 @@ export default {
     display: flex;
     align-items: flex-end;
     box-sizing: border-box;
-    padding-left: 13.65%;
+    padding-left: 14.19%;
 }
 .header img{
   width: 40px;
