@@ -49,7 +49,6 @@ module.exports = {
     '@/plugins/element-ui',
     '@/plugins/echarts',
     { src: '~/plugins/swiper.js', ssr: false },
-    { src: '~/plugins/ga.js', ssr: false },
   ],
 
   /*

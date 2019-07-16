@@ -8,6 +8,9 @@ export default {
   name:'layouts',
   mounted(){
     this.shareButton()
+    // if ( process.env.NODE_ENV === 'production') {
+      this.googleAnalytics('UA-105411592-8')
+    // }
   },
   methods:{
     shareButton(){
@@ -24,6 +27,28 @@ export default {
         setTimeout(()=>{
           document.getElementById('__nuxt').appendChild(script)
           script=null
+        },1000)
+      }
+    },
+    googleAnalytics(id){
+      let script=document.createElement('script')
+      script.src='https://www.googletagmanager.com/gtag/js?id='+id
+      let rootE=document.getElementById('__nuxt')
+      script.onload=function(){
+        window.dataLayer = window.dataLayer || []; 
+        window.gtag=function(){dataLayer.push(arguments);} 
+        gtag('js', new Date()); 
+        setTimeout(()=>{
+          gtag('config', 'UA-105411592-7');
+        },100)
+      }
+      if(rootE){
+        rootE.appendChild(script)
+        script=null
+      }else{
+        setTimeout(()=>{
+           rootE.appendChild(script)
+        script=null
         },1000)
       }
     }
