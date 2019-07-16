@@ -37,7 +37,7 @@
              <!-- Add Arrows -->
        </div>
         <button ref="next" class="button-next"></button>
-        <button ref="prev" class="button-prev"></button>
+        <button ref="prev" class="button-prev" style="display:none;"></button>
      </div>
   </div>
 </template>
@@ -72,12 +72,23 @@ return {
         vm.$refs.next.onclick=function(){
           let i=swiper.realIndex
           i++
-         
+          if(i==vm.userPost.length-2){
+            vm.$refs.next.style.display='none'
+            vm.$refs.prev.style.display='block'
+          }else{
+            vm.$refs.next.style.display='block'
+            vm.$refs.prev.style.display='block'
+          }
           swiper.slideToLoop(i,500)
         }
         vm.$refs.prev.onclick=function(){
            let i=swiper.realIndex
            i--
+          if(i<=1){
+            vm.$refs.prev.style.display='none'
+          }else{
+            vm.$refs.next.style.display='block'
+          }
            swiper.slideToLoop(i,500)
         }
       }
@@ -282,7 +293,7 @@ line-height:33px;
 }
 .swiper-slide .content span{
   width: 100%;
-  height: 234px;
+  height: 120px;
   color:#3D4FD5;
   font-size:16px;
   font-family:PingFangSC-Semibold;
@@ -293,6 +304,7 @@ line-height:33px;
   word-wrap : break-word ;
   overflow-y: auto;
 }
+
 .swiper-slide  .bottom{
   width: 100%;
   height: 125px;
@@ -318,12 +330,13 @@ margin-bottom: 6px;
   line-height:22px;
   display: block;
 }
+
 .swiper-slide  .bottom a{
   float: right;
   margin-top: 15px;
   font-size:16px;
   font-family:PingFangSC-Semibold;
-  font-weight:600;
+  font-weight:500;
   color:#8F8F8F;
   line-height:22px;
 }
@@ -331,6 +344,11 @@ margin-bottom: 6px;
   .post h5{
     font-size: 20px;
   }
-
+  .post_swiper .button-next,
+  .post_swiper .button-prev{
+  width: 60px;
+  height: 60px;
+  margin-top: -30px;
+  }
 }
 </style>
