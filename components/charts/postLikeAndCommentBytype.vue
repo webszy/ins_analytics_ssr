@@ -113,6 +113,7 @@ return {
     series: [
       {name: 'Picture',
         type: 'bar',
+        barWidth:40,
         data:[],
         markPoint: {
                 data: [{
@@ -133,6 +134,7 @@ return {
       },
       {name: 'Others',
         type: 'bar',
+        barWidth:40,
         data: [],
         markPoint: {
                 data: [{
