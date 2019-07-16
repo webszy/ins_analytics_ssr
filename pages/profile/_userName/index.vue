@@ -194,6 +194,11 @@ components:{
   topPost,
   TagCloud
 },
+head(){
+     return {
+      title: 'Instagram Profile Analytics For @Account - InsAnalysis.vip',
+    }
+  },
 data(){
 return {
    userName:this.$route.params.userName||'',
@@ -224,6 +229,8 @@ mounted(){
   if(this.userName!=''){
     this.showLoading=true
    this.getProfileData(this.userName)
+  }else{
+    this.$router.push('/')
   }
 
 },
@@ -252,7 +259,17 @@ methods:{
       }else{
         this.getCommentDetails()
       }
-      
+    })
+    .catch(error=>{
+      if(error.response.data.length > 0 && error.response.status == 404){
+        this.$message({
+          type:'warning',
+          message:'Oops, this username doesn’t exist.we will back to Home after 3s',
+          duration:3000,
+          onClose:()=>{this.$router.push('/')}
+        })
+      }
+    
     })
   },
   getUserAllPost(){

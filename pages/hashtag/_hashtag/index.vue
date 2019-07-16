@@ -119,6 +119,11 @@ components:{
   postLikeAndCommentByType,
   locationCloud
 },
+head(){
+     return {
+      title: 'Instagram Hashtag Analytics For #Hashtag - InsAnalysis.vip',
+    }
+  },
 data(){
   return {
     hashtag:this.$route.params.hashtag||'',
@@ -140,6 +145,8 @@ mounted(){
   if(this.hashtag!==''){
     this.showLoading=true
     this.getHashTagBaseData()
+  }else{
+    this.$router.push('/')
   }
 },
 methods:{
@@ -162,6 +169,18 @@ methods:{
       }
       
       this.getMediaDetail()
+    })
+    .catch(error=>{
+      if(error.response.data.length > 0 && error.response.status == 404){
+        this.$message({
+          type:'warning',
+          message:'Oops, this hashtag doesn’t exist.we will back to Home after 3s',
+          duration:3000,
+          onClose:()=>{this.$router.push('/')}
+        })
+
+      }
+    
     })
   },
   async getMediaDetail(){
