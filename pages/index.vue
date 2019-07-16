@@ -3,7 +3,7 @@
     <common-head></common-head>
     <section class="banner">
       <div>
-        <h5>WelCome to <span>{{info.name}}</span> </h5>
+        <h5>Welcome to <span>{{info.name}}</span> </h5>
         <h3>{{info.subName}}</h3>
         <p>Enter any @Profile or #Hashtag to ananlyze real-time <span>Engagement Analysis</span></p>
       </div>
@@ -60,14 +60,14 @@ export default {
       if(this.username!=''){
         this.$router.push({name:'profile-userName',params:{userName:this.username}})
       }else{
-        this.$message.warning('Please enter a username ')
+        this.$message.warning('Please enter a username!')
       }
     },
     toHashtag(){
       if(this.hashtag!=''){
         this.$router.push({name:'hashtag-hashtag',params:{hashtag:this.hashtag}})
       }else{
-        this.$message.warning('Please enter a Tag ')
+        this.$message.warning('Please enter a Tag!')
       }
     }
   }
@@ -91,7 +91,7 @@ export default {
 .banner div{
   padding-left: 13.48%;
   /* padding-top: 27.08%; */
-  padding-top: 15%;
+  padding-top: 13%;
   color:#000;
   font-size: 10px;
   box-sizing: border-box;
