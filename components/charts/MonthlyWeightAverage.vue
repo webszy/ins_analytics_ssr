@@ -48,7 +48,7 @@ return {
         top: '15%',
         left: '5%',
         right: '5%',
-        bottom: '6%',
+        bottom: '7%',
         containLabel: true,
     },
     xAxis: {
@@ -56,6 +56,7 @@ return {
         boundaryGap: false,
         data: [],
         axisLabel: {
+            rotate:'-20',
             margin: 30,
             color: '#E4E8EB',
             textStyle:{
@@ -229,15 +230,11 @@ methods:{
         let likeData={},commentData={},len=0,likeArr=[],commentArr=[],xData=[]
         for(let k of this.chartData){
             let d=new Date(k.taken_at_timestamp*1000),
-            month=d.getMonth(),
-            year=(d.getFullYear()+'').substr(-2),
-            monthStr=monthName[month]+"'"+year,
-            
+            month=d.getMonth()==0?1:d.getMonth(),
+            year=d.getFullYear(),
+            monthStr=year+'/'+month,
             likeCount=k.edge_media_preview_like.count||0,
             commentCount=k.edge_media_to_comment.count||0
-            if(monthStr==="Jan'18"){
-                console.log(likeCount)
-            }
             
             if(!likeData[monthStr]){
                 likeData[monthStr]=0

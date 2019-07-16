@@ -46,9 +46,9 @@ data(){
       grid: {
           left: '4%',
           right: '5%',
-          bottom: '5%',
+          bottom: '10%',
           top: '15%',
-          height: '85%',
+          height: '80%',
           containLabel: true,
           z: 22
       },
@@ -65,6 +65,8 @@ data(){
               }
           },
           axisLabel: {
+            margin:20,
+            rotate:'-20',
             show: true,
             formatter: '{value}',
             color: '#E4E8EB',
@@ -228,9 +230,9 @@ methods:{
         let baseData={},xData=[],yData=[]
         for(let k of this.chartData){
             let d=new Date(k.taken_at_timestamp*1000),
-            month=d.getMonth(),
-            year=(d.getFullYear()+'').substr(-2),
-            monthStr=monthName[month]+"'"+year
+            month=d.getMonth()==0?1:d.getMonth(),
+            year=d.getFullYear(),
+            monthStr=year+'/'+month
             if(!baseData[monthStr]){
                 baseData[monthStr]=1
             }else{
