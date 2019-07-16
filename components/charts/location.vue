@@ -50,7 +50,7 @@ computed:{
     for(let k of this.chartData){
      
       if(k.location&&k.location!==null){
-      console.log("TCL: userLocation -> k.location", k.location)
+      // console.log("TCL: userLocation -> k.location", k.location)
         if(k.location.name&&k.location.name.length){
 
           if(!data[k.location.name]){
