@@ -7,12 +7,13 @@
 // }
 import Vue from 'vue'
 import { 
-    Image
+    Image,
+    Message
     
 } from 'element-ui' //引入组件
 Vue.prototype.$ELEMENT = { size: 'small' };
 // Vue.use(Loading);
 Vue.use(Image);
-// Vue.prototype.$message = Message;
+Vue.prototype.$message = Message;
 // Vue.prototype.$notify = Notification;
 // Vue.prototype.$loading = Loading;
