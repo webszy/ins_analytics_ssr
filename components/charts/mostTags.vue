@@ -43,7 +43,7 @@ data(){
           formatter: "{b}:{c}"
         },
       title:{
-        text:'Hashtags most used',
+        text:'Favorite Hashtags',
         left: "4%",
         top: "1%",
         textStyle: {

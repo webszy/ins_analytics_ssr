@@ -38,7 +38,7 @@ data(){
         name: 'HashTags',
         type: 'wordCloud',
         gridSize: 2,
-        sizeRange: [20, 60],
+        sizeRange: [10, 40],
         rotationRange: [-90, 90],
         // circle cardioid diamond  triangle-forward triangle pentagon square
         shape: 'square',
@@ -155,8 +155,8 @@ methods:{
           let obj={name:k,value:tags[k]}
           arr.push(obj)
         }
-        // console.log("tagcloud",arr)
-        resolve(arr)
+        arr.sort((a,b)=>a.value-b.value)
+        resolve(arr.slice(0,99))
     })
   },
   _initChart(){

@@ -253,7 +253,14 @@ methods:{
             likeArr.push(likeData[k])
             commentArr.push(commentData[k])
         }
-         resolve({xData,likeArr,commentArr})
+
+        likeArr.forEach((item,i)=>{
+            likeArr[i]=Math.round(likeArr[i]/len)
+        })
+        commentArr.forEach((item,i)=>{
+            commentArr[i]=Math.round(commentArr[i]/len)
+        })
+        resolve({xData,likeArr,commentArr})
     })
    
   },

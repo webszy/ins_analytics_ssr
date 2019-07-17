@@ -28,7 +28,7 @@ data(){
           }
       },
       title: {
-        text: "Post Count",
+        text: "Total Post Monthly",
         subtext:'',
         left: "4%",
         top: "1%",
