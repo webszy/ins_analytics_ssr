@@ -8,9 +8,9 @@ export default {
   name:'layouts',
   mounted(){
     this.shareButton()
-    // if ( process.env.NODE_ENV === 'production') {
+    if ( process.env.NODE_ENV === 'production') {
       this.googleAnalytics('UA-105411592-8')
-    // }
+    }
   },
   methods:{
     shareButton(){
@@ -39,7 +39,7 @@ export default {
         window.gtag=function(){dataLayer.push(arguments);} 
         gtag('js', new Date()); 
         setTimeout(()=>{
-          gtag('config', 'UA-105411592-7');
+          gtag('config', id);
         },100)
       }
       if(rootE){
