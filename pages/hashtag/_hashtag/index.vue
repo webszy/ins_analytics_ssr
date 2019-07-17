@@ -102,11 +102,16 @@ import {
 } from '@/utils/request'
 import loading from '@/components/loading'
 import commonHead from '@/components/commonHead'
-import topPost from '@/components/topPost'
-import MonthlyWeightAverage from '@/components/tagCharts/MonthlyWeightAverage.vue'
-import PostingActivity from '@/components/charts/PostingActivity.vue'
-import postLikeAndCommentByType from '@/components/charts/postLikeAndCommentBytype.vue'
-import locationCloud from '@/components/tagCharts/locationCloud.vue'
+// import topPost from '@/components/topPost'
+// import MonthlyWeightAverage from '@/components/tagCharts/MonthlyWeightAverage.vue'
+// import PostingActivity from '@/components/charts/PostingActivity.vue'
+// import postLikeAndCommentByType from '@/components/charts/postLikeAndCommentBytype.vue'
+// import locationCloud from '@/components/tagCharts/locationCloud.vue'
+const MonthlyWeightAverage=()=>import('../../../components/tagCharts/MonthlyWeightAverage')
+const topPost=()=>import('../../../components/topPost')
+const locationCloud=()=>import('../../../components/tagCharts/locationCloud')
+const postLikeAndCommentByType=()=>import('../../../components/charts/postLikeAndCommentByType')
+const PostingActivity=()=>import('../../../components/charts/PostingActivity')
 
 export default {
 name:'HashTagAnalytics',

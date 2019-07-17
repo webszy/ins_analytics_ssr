@@ -38,18 +38,18 @@ data(){
         name: 'HashTags',
         type: 'wordCloud',
         gridSize: 2,
-        sizeRange: [10, 40],
+        sizeRange: [15, 50],
         rotationRange: [-90, 90],
         // circle cardioid diamond  triangle-forward triangle pentagon square
         shape: 'square',
         left: '5%',
-        top: '5%',
+        top: '10%',
         width: '90%',
         height: '90%',
         right: '5%',
         bottom: '5%',
         gridSize:6,
-        drawOutOfBound: true,
+        drawOutOfBound: false,
         data: [],
         label: {
             normal: {

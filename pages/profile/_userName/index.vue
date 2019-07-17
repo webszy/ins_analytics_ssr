@@ -169,15 +169,24 @@ import {
 } from '@/utils/request'
 import {parseNum} from '@/utils/tools'
 import {weekName,monthName} from '@/utils/variables'
-import MonthlyWeightAverage from '@/components/charts/MonthlyWeightAverage.vue'
-import MonthlyPost from '@/components/charts/MonthlyPost.vue'
-import mostTags from '@/components/charts/mostTags.vue'
-import location from '@/components/charts/location.vue'
-import postLikeAndCommentByType from '@/components/charts/postLikeAndCommentBytype.vue'
-import PostingActivity from '@/components/charts/PostingActivity.vue'
-import TotalPostWeekly from '@/components/charts/TotalPostWeekly.vue'
-import TagCloud from '@/components/charts/TagCloud.vue'
-import topPost from '@/components/topPost.vue'
+// import MonthlyWeightAverage from '@/components/charts/MonthlyWeightAverage.vue'
+// import MonthlyPost from '@/components/charts/MonthlyPost.vue'
+// import mostTags from '@/components/charts/mostTags.vue'
+// import location from '@/components/charts/location.vue'
+// import postLikeAndCommentByType from '@/components/charts/postLikeAndCommentBytype.vue'
+// import PostingActivity from '@/components/charts/PostingActivity.vue'
+// import TotalPostWeekly from '@/components/charts/TotalPostWeekly.vue'
+// import TagCloud from '@/components/charts/TagCloud.vue'
+// import topPost from '@/components/topPost.vue'
+const MonthlyWeightAverage=()=>import('../../../components/charts/MonthlyWeightAverage')
+const MonthlyPost=()=>import('../../../components/charts/MonthlyPost')
+const mostTags=()=>import('../../../components/charts/mostTags')
+const location=()=>import('../../../components/charts/location')
+const postLikeAndCommentByType=()=>import('../../../components/charts/postLikeAndCommentByType')
+const PostingActivity=()=>import('../../../components/charts/PostingActivity')
+const TotalPostWeekly=()=>import('../../../components/charts/TotalPostWeekly')
+const topPost=()=>import('../../../components/topPost')
+const TagCloud=()=>import('../../../components/charts/TagCloud')
 import commonHead from '@/components/commonHead'
 export default {
 name:'ProfileAnalytics',
@@ -383,7 +392,7 @@ methods:{
     for(let k of chartData){
      
       if(k.location&&k.location!==null){
-      console.log("TCL: userLocation -> k.location", k.location)
+      // console.log("TCL: userLocation -> k.location", k.location)
         if(k.location.name&&k.location.name.length){
 
           if(!data[k.location.name]){

@@ -15,7 +15,7 @@ return {
   option :{
     backgroundColor: '#fff',
     title: {
-        text: "Average Engagement ( Likes + Comments )",
+        text: "Engagement Preview ( Likes + Comments )",
         subtext:'',
         left: "4%",
         top: "1%",
@@ -254,12 +254,10 @@ methods:{
             commentArr.push(commentData[k])
         }
 
-        likeArr.forEach((item,i)=>{
-            likeArr[i]=Math.round(likeArr[i]/len)
-        })
-        commentArr.forEach((item,i)=>{
-            commentArr[i]=Math.round(commentArr[i]/len)
-        })
+        // likeArr.forEach((item,i)=>{
+        //     likeArr[i]=Math.round(likeArr[i]/len)
+        // })
+        
         resolve({xData,likeArr,commentArr})
     })
    

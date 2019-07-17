@@ -125,7 +125,7 @@ methods:{
           let obj={name:k,value:baseData[k]}
           arr.push(obj)
         }
-        console.log("tagcloud",arr)
+        // console.log("tagcloud",arr)
         if(arr.length===0){
           arr.push({name:'Not Find',value:1})
         }
