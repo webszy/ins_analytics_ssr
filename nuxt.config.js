@@ -1,4 +1,3 @@
-const pkg = require('./package')
 const info=require('./assets/content/seo')
 
 module.exports = {
@@ -14,14 +13,14 @@ module.exports = {
       { name: 'viewport', content: 'width=device-width, initial-scale=1, user-scalable=no' },
       { hid: 'description', name: 'description', content: info.description },
       { hid: 'keywords', name: 'keywords', content: info.keywords },
-      { name:'og:site_name',property:'og:site_name',content:''},
+      { name:'og:site_name',property:'og:site_name',content:info.name},
       { name:'og:title',property:'og:type',content:info.title},
-      { name:'og:url',property:'og:url',content:''},
+      { name:'og:url',property:'og:url',content:'https://insanalysis.vip'},
       { name:'og:description',property:'og:description',content:info.description},
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-       { rel: 'canonical', href: '' },
+      { rel: 'canonical', href: 'https://insanalysis.vip' },
     ]
   },
 
