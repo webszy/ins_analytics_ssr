@@ -178,16 +178,16 @@ import {weekName,monthName} from '@/utils/variables'
 // import TotalPostWeekly from '@/components/charts/TotalPostWeekly.vue'
 // import TagCloud from '@/components/charts/TagCloud.vue'
 // import topPost from '@/components/topPost.vue'
-const MonthlyWeightAverage=()=>import('../../../components/charts/MonthlyWeightAverage')
-const MonthlyPost=()=>import('../../../components/charts/MonthlyPost')
-const mostTags=()=>import('../../../components/charts/mostTags')
-const location=()=>import('../../../components/charts/location')
-const postLikeAndCommentByType=()=>import('../../../components/charts/postLikeAndCommentByType')
-const PostingActivity=()=>import('../../../components/charts/PostingActivity')
-const TotalPostWeekly=()=>import('../../../components/charts/TotalPostWeekly')
-const topPost=()=>import('../../../components/topPost')
-const TagCloud=()=>import('../../../components/charts/TagCloud')
-import commonHead from '@/components/commonHead'
+const MonthlyWeightAverage=()=>import('../../../components/charts/MonthlyWeightAverage.vue')
+const MonthlyPost=()=>import('../../../components/charts/MonthlyPost.vue')
+const mostTags=()=>import('../../../components/charts/mostTags.vue')
+const location=()=>import('../../../components/charts/location.vue')
+const postLikeAndCommentByType=()=>import('../../../components/charts/postLikeAndCommentBytype.vue')
+const PostingActivity=()=>import('../../../components/charts/PostingActivity.vue')
+const TotalPostWeekly=()=>import('../../../components/charts/TotalPostWeekly.vue')
+const topPost=()=>import('../../../components/topPost.vue')
+const TagCloud=()=>import('../../../components/charts/TagCloud.vue')
+import commonHead from '@/components/commonHead.vue'
 export default {
 name:'ProfileAnalytics',
 components:{
