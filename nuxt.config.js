@@ -17,6 +17,7 @@ module.exports = {
       { name:'og:title',property:'og:type',content:info.title},
       { name:'og:url',property:'og:url',content:'https://insanalysis.vip'},
       { name:'og:description',property:'og:description',content:info.description},
+      { name:'og:image',property:'og:image',content:'https://insanalysis.vip/sharelogo.png'},
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
