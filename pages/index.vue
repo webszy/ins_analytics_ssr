@@ -37,6 +37,7 @@
         </div>
       </div>
     </section>
+    <s-footer></s-footer>
   </section>
 </template>
 
@@ -44,9 +45,10 @@
 import featureIcons from '../assets/content/featuresIcons'
 import commonHead from '../components/commonHead'
 import info from '../assets/content/seo'
+import sFooter from '../components/footer'
 export default {
   name:'HomePage',
-  components: {commonHead},
+  components: {commonHead,sFooter},
   data(){
     return {
       username:'',
@@ -199,7 +201,7 @@ export default {
 .features{
   width: 100%;
   padding-top: 186px;
-  padding-bottom: 526px;
+  padding-bottom: 326px;
 }
 .features h2{
   font-size:40px;
