@@ -1,4 +1,4 @@
-const info=require('./assets/content/seo')
+const info = require('./assets/content/seo')
 
 module.exports = {
   mode: 'universal',
@@ -13,15 +13,20 @@ module.exports = {
       { name: 'viewport', content: 'width=device-width, initial-scale=1, user-scalable=no' },
       { hid: 'description', name: 'description', content: info.description },
       { hid: 'keywords', name: 'keywords', content: info.keywords },
-      { name:'og:site_name',property:'og:site_name',content:info.name},
-      { name:'og:title',property:'og:type',content:info.title},
-      { name:'og:url',property:'og:url',content:'https://insanalysis.vip'},
-      { name:'og:description',property:'og:description',content:info.description},
-      { name:'og:image',property:'og:image',content:'https://insanalysis.vip/sharelogo.png'},
+      { name: 'og:site_name', property: 'og:site_name', content: info.name },
+      { name: 'og:title', property: 'og:type', content: info.title },
+      { name: 'og:url', property: 'og:url', content: 'https://insanalysis.vip' },
+      { name: 'og:description', property: 'og:description', content: info.description },
+      { name: 'og:image', property: 'og:image', content: 'https://insanalysis.vip/sharelogo.png'},
+      { name: 'twitter:card', content: 'summary' },
+      { name: 'twitter:description', content: info.description },
+      { name: 'twitter:title', content: info.title },
+      { name: 'twitter:url', content: 'https://insanalysis.vip' },
+      { name: 'theme-color', content: '#f94c5c' }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      { rel: 'canonical', href: 'https://insanalysis.vip' },
+      { rel: 'canonical', href: 'https://insanalysis.vip' }
     ]
   },
 
@@ -56,7 +61,7 @@ module.exports = {
   */
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
-    '@nuxtjs/axios',
+    '@nuxtjs/axios'
   ],
   /*
   ** Axios module configuration
@@ -70,23 +75,21 @@ module.exports = {
   */
   build: {
     transpile: [/^element-ui/],
-    
     /*
     ** You can extend webpack config here
     */
-    extend(config, ctx) {
-      
+    extend (config, ctx) {
     },
-     postcss:{
-      autoprefixer:{
+    postcss: {
+      autoprefixer: {
         grid: true
       }
     },
-    performance:{
-    gzip:true,
-    threshold:10240,
-    prefetch:true
-  },
-   cache: true
+    performance: {
+      gzip: true,
+      threshold: 10240,
+      prefetch: true
+    },
+    cache: true
   }
 }
