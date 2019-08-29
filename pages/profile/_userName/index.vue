@@ -270,14 +270,13 @@ methods:{
       }
     })
     .catch(error=>{
-      if(error.response.data.length > 0 && error.response.status == 404){
+        let msg = localStorage.getItem('status')==404?'Oops, this user doesn’t exist.':'Oops, this username doesn’t exist.'
         this.$message({
           type:'warning',
-          message:'Oops, this username doesn’t exist.we will back to Home after 3s',
+          message:msg+'we will back to Home after 3s',
           duration:3000,
           onClose:()=>{this.$router.push('/')}
         })
-      }
     
     })
   },
