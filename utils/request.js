@@ -23,10 +23,11 @@ Service.interceptors.response.use(
       // });
     } else if (error.response.data.length > 0) {
       if (error.response.status === 404) {
-        localStorage.setItem('status', 404)
+        sessionStorage.setItem('status', 404)
         // Message.warning('Oops, this user doesn’t exist.')
       }
     } else {
+      sessionStorage.removeItem('status')
       // Message.warning('Oops! Something wrong with networks.')
     }
     return Promise.reject(error)

@@ -270,7 +270,7 @@ methods:{
       }
     })
     .catch(error=>{
-        let msg = localStorage.getItem('status')==404?'Oops, this user doesn’t exist.':'Oops, this username doesn’t exist.'
+        let msg = sessionStorage.getItem('status')==404?'Oops, this user doesn’t exist.':'Oops, this username doesn’t exist.'
         this.$message({
           type:'warning',
           message:msg+'we will back to Home after 3s',
